@@ -11,7 +11,7 @@ public class ServicesController {
     @GetMapping("/api/services")
     public List<Service> services() {
         return List.of(
-            new Service("nextcloud", "Nextcloud", "Up", "100")
+            new Service("nextcloud", "Nextcloud", "Up", "107")
         );
     }
 

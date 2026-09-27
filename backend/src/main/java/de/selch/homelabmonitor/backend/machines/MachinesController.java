@@ -7,12 +7,14 @@ import java.util.List;
 
 @RestController
 public class MachinesController {
+    private final MachineService machineService;
+
+    public MachinesController(MachineService machineService) {
+        this.machineService = machineService;
+    }
 
     @GetMapping("/api/machines")
     public List<Machine> machines() {
-        return List.of(
-            new Machine("100", "Homelab", "Up", 12.5, 48.0),
-            new Machine("101", "Docker Prod", "Up", 18.2, 62.4)
-        );
+        return machineService.machines();
     }
 }
