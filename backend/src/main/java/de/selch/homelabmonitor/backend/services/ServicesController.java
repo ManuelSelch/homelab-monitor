@@ -7,13 +7,14 @@ import java.util.List;
 
 @RestController
 public class ServicesController {
+    private final ServiceRepository serviceRepository;
 
-    @GetMapping("/api/services")
-    public List<Service> services() {
-        return List.of(
-            new Service("nextcloud", "Nextcloud", "Up", "107")
-        );
+    public ServicesController(ServiceRepository serviceRepository) {
+        this.serviceRepository = serviceRepository;
     }
 
-    public record Service(String id, String name, String status, String machineId) {}
+    @GetMapping("/api/services")
+    public List<HomelabService> services() {
+        return serviceRepository.findAll();
+    }
 }

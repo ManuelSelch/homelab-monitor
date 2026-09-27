@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest
+@SpringBootTest(properties = "services.file=src/test/resources/services.yaml")
 @AutoConfigureMockMvc
 public class IT_ServicesAPI {
 
