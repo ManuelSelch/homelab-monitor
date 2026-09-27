@@ -7,15 +7,12 @@ import { ServiceCard } from './components/service-card/service-card';
 import { UiStack } from './ui/stack/stack';
 import { UiText } from './ui/text/text';
 
-type OverviewResponse = {
-  services: OverviewService[];
-};
-
-type OverviewService = {
+type HomelabService = {
   id: string;
   name: string;
-  type?: string;
   status: string;
+  vmId: string;
+  type?: string;
   url?: string;
 };
 
@@ -44,11 +41,11 @@ export class App {
 
   constructor() {
     this.http
-      .get<OverviewResponse>('/api/overview')
+      .get<HomelabService[]>('/api/services')
       .pipe(takeUntilDestroyed())
       .subscribe({
-        next: (overview) => {
-          this.services.set(overview.services.map(toServiceViewModel));
+        next: (services) => {
+          this.services.set(services.map(toServiceViewModel));
           this.error.set(null);
           this.isLoading.set(false);
         },
@@ -60,7 +57,7 @@ export class App {
   }
 }
 
-function toServiceViewModel(service: OverviewService): ServiceViewModel {
+function toServiceViewModel(service: HomelabService): ServiceViewModel {
   return {
     id: service.id,
     name: service.name,

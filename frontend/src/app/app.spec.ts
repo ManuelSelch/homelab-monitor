@@ -18,13 +18,13 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render services from the overview endpoint', async () => {
+  it('should render services from the services endpoint', async () => {
     const fixture = TestBed.createComponent(App);
     const http = TestBed.inject(HttpTestingController);
 
-    http.expectOne('/api/overview').flush({
-      services: [{ id: 'nextcloud', name: 'Nextcloud', status: 'Up' }],
-    });
+    http.expectOne('/api/services').flush([
+      { id: 'nextcloud', name: 'Nextcloud', status: 'Up', vmId: '100' },
+    ]);
 
     fixture.detectChanges();
     await fixture.whenStable();
