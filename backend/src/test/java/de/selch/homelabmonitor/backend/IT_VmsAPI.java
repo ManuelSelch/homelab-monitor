@@ -12,19 +12,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class IT_ServicesAPI {
+public class IT_VmsAPI {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    void returnsHomelabServices() throws Exception {
-        mockMvc.perform(get("/api/services"))
+    void returnsHomelabVms() throws Exception {
+        mockMvc.perform(get("/api/vms"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$[*].id",      hasItem("nextcloud")))
-                .andExpect(jsonPath("$[*].name",    hasItem("Nextcloud")))
-                .andExpect(jsonPath("$[*].status",  hasItem("Up")))
-                .andExpect(jsonPath("$[*].vmId",    hasItem("100")));
+                .andExpect(jsonPath("$[*].id", hasItem("100")))
+                .andExpect(jsonPath("$[*].name", hasItem("Homelab")))
+                .andExpect(jsonPath("$[0].cpuUsage").isNumber())
+                .andExpect(jsonPath("$[0].memoryUsage").isNumber());
     }
 }
