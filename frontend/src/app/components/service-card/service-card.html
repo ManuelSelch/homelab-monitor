@@ -1,0 +1,21 @@
+<section class="mx-auto max-w-md" hlmCard>
+    <div hlmCardHeader>
+        <h3 hlmCardTitle>{{ name() }}</h3>
+        <p hlmCardDescription>{{ type() }}</p>
+    </div>
+
+    <div hlmCardContent>
+        <div class="flex items-center justify-between gap-4">
+        <span class="text-sm text-muted-foreground">Status</span>
+        <span class="rounded-full bg-green-100 px-2.5 py-0.5 text-sm font-medium text-green-700">
+            {{ status() }}
+        </span>
+        </div>
+    </div>
+
+    @if (url()) {
+        <div hlmCardFooter>
+            <a class="text-sm font-medium underline-offset-4 hover:underline" [href]="url()" target="_blank">View details</a>
+        </div>
+    }
+</section>

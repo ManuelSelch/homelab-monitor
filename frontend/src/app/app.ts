@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HlmCardImports } from '@spartan-ng/helm/card';
+import { ServiceCard } from './components/service-card/service-card';
 
 @Component({
-  imports: [RouterOutlet, HlmCardImports],
+  imports: [RouterOutlet, ServiceCard],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',

@@ -1,25 +1,5 @@
-<main class="min-h-dvh bg-background p-6 text-foreground">
-  <section class="mx-auto max-w-md" hlmCard>
-    <div hlmCardHeader>
-      <h3 hlmCardTitle>Nextcloud</h3>
-      <p hlmCardDescription>Cloud service</p>
-    </div>
-
-    <div hlmCardContent>
-      <div class="flex items-center justify-between gap-4">
-        <span class="text-sm text-muted-foreground">Status</span>
-        <span class="rounded-full bg-green-100 px-2.5 py-0.5 text-sm font-medium text-green-700">
-          Online
-        </span>
-      </div>
-    </div>
-
-    <div hlmCardFooter>
-      <a class="text-sm font-medium underline-offset-4 hover:underline" href="https://nextcloud.com" target="_blank">
-        View details
-      </a>
-    </div>
-  </section>
+<main class="min-h-dvh p-6 bg-background text-foreground">
+  <app-service-card name="Nextcloud" type="Cloud Service" status="Online" url="https://nextcloud.com"/>
 </main>
 
 <router-outlet />
