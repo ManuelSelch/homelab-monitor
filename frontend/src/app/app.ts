@@ -9,17 +9,19 @@ import { ServiceCard } from './components/service-card/service-card';
 import { UiStack } from './ui/stack/stack';
 import { UiText } from './ui/text/text';
 
-type HomelabVm = {
+type HomelabMachine = {
   id: string;
   name: string;
-  status?: string;
+  status: string;
+  cpuUsage: number;
+  memoryUsage: number;
 };
 
 type HomelabService = {
   id: string;
   name: string;
   status: string;
-  vmId?: string;
+  machineId?: string;
   type?: string;
   url?: string;
 };
@@ -42,7 +44,7 @@ export class App {
 
   constructor() {
     forkJoin({
-      vms: this.http.get<HomelabVm[]>('/api/vms'),
+      vms: this.http.get<HomelabMachine[]>('/api/machines'),
       services: this.http.get<HomelabService[]>('/api/services'),
     })
       .pipe(takeUntilDestroyed())
@@ -63,21 +65,21 @@ export class App {
   }
 }
 
-function toDashboardViewModel(vms: HomelabVm[], services: HomelabService[]) {
-  const vmIds = new Set(vms.map((vm) => vm.id));
-  const servicesByVmId = new Map<string, HomelabService[]>();
+function toDashboardViewModel(vms: HomelabMachine[], services: HomelabService[]) {
+  const machineIds = new Set(vms.map((vm) => vm.id));
+  const servicesByMachineId = new Map<string, HomelabService[]>();
 
   for (const service of services) {
-    if (!service.vmId || !vmIds.has(service.vmId)) {
+    if (!service.machineId || !machineIds.has(service.machineId)) {
       continue;
     }
 
-    servicesByVmId.set(service.vmId, [...(servicesByVmId.get(service.vmId) ?? []), service]);
+    servicesByMachineId.set(service.machineId, [...(servicesByMachineId.get(service.machineId) ?? []), service]);
   }
 
   return {
     vms: vms.map((vm) => {
-      const services = (servicesByVmId.get(vm.id) ?? []).map(toServiceViewModel);
+      const services = (servicesByMachineId.get(vm.id) ?? []).map(toServiceViewModel);
 
       return {
         id: vm.id,
@@ -87,7 +89,7 @@ function toDashboardViewModel(vms: HomelabVm[], services: HomelabService[]) {
       };
     }),
     unassignedServices: services
-      .filter((service) => !service.vmId || !vmIds.has(service.vmId))
+      .filter((service) => !service.machineId || !machineIds.has(service.machineId))
       .map(toServiceViewModel),
   };
 }

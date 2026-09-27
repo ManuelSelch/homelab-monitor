@@ -17,22 +17,22 @@ describe('App', () => {
     const http = TestBed.inject(HttpTestingController);
     const app = fixture.componentInstance;
 
-    http.expectOne('/api/vms').flush([]);
+    http.expectOne('/api/machines').flush([]);
     http.expectOne('/api/services').flush([]);
 
     expect(app).toBeTruthy();
     http.verify();
   });
 
-  it('should render services grouped by VM', async () => {
+  it('should render services grouped by machine', async () => {
     const fixture = TestBed.createComponent(App);
     const http = TestBed.inject(HttpTestingController);
 
-    http.expectOne('/api/vms').flush([
-      { id: '100', name: 'Docker VM' },
+    http.expectOne('/api/machines').flush([
+      { id: '100', name: 'Docker VM', status: 'Up', cpuUsage: 12.5, memoryUsage: 48.0 },
     ]);
     http.expectOne('/api/services').flush([
-      { id: 'nextcloud', name: 'Nextcloud', status: 'Up', vmId: '100' },
+      { id: 'nextcloud', name: 'Nextcloud', status: 'Up', machineId: '100' },
     ]);
 
     fixture.detectChanges();

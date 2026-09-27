@@ -12,14 +12,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class IT_VmsAPI {
+public class IT_MachinesAPI {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    void returnsHomelabVms() throws Exception {
-        mockMvc.perform(get("/api/vms"))
+    void returnsHomelabMachines() throws Exception {
+        mockMvc.perform(get("/api/machines"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$[*].id", hasItem("100")))

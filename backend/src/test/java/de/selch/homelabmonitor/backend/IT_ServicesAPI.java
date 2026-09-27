@@ -25,6 +25,6 @@ public class IT_ServicesAPI {
                 .andExpect(jsonPath("$[*].id",      hasItem("nextcloud")))
                 .andExpect(jsonPath("$[*].name",    hasItem("Nextcloud")))
                 .andExpect(jsonPath("$[*].status",  hasItem("Up")))
-                .andExpect(jsonPath("$[*].vmId",    hasItem("100")));
+                .andExpect(jsonPath("$[*].machineId", hasItem("100")));
     }
 }

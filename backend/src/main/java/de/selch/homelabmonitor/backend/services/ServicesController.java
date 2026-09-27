@@ -15,5 +15,5 @@ public class ServicesController {
         );
     }
 
-    public record Service(String id, String name, String status, String vmId) {}
+    public record Service(String id, String name, String status, String machineId) {}
 }

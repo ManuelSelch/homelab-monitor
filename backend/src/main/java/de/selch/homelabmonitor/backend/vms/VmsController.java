@@ -1,5 +1,6 @@
 package de.selch.homelabmonitor.backend.vms;
 
+import de.selch.homelabmonitor.backend.machines.Machine;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,11 +10,9 @@ import java.util.List;
 public class VmsController {
 
     @GetMapping("/api/vms")
-    public List<Vm> vms() {
+    public List<Machine> vms() {
         return List.of(
-            new Vm("100", "Homelab", 12.5, 48.0)
+            new Machine("100", "Homelab", "Up", 12.5, 48.0)
         );
     }
-
-    public record Vm(String id, String name, double cpuUsage, double memoryUsage) {}
 }
