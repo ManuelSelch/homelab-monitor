@@ -6,7 +6,6 @@ import { ServiceCard } from './components/service-card/service-card';
 @Component({
   imports: [RouterOutlet, AppShell, ServiceCard],
   selector: 'app-root',
-  styleUrl: './app.css',
   templateUrl: './app.html',
 })
 export class App {
