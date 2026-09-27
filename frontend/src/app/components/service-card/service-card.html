@@ -13,9 +13,9 @@
 
   @if (url()) {
     <div hlmCardFooter>
-      <a class="text-sm font-medium underline-offset-4 hover:underline" [href]="url()" target="_blank">
+      <ui-link [href]="url()!" external>
         View details
-      </a>
+      </ui-link>
     </div>
   }
 </section>
