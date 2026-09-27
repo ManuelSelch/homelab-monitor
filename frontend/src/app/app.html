@@ -1,20 +1,30 @@
 <app-shell title="Homelab Monitor" subtitle="Services & infrastructure health">
   <ui-stack>
     @if (isLoading()) {
-      <ui-text variant="muted">Loading services…</ui-text>
+      <ui-text variant="muted">Loading VMs and services…</ui-text>
     } @else if (error()) {
       <ui-text variant="muted">{{ error() }}</ui-text>
-    } @else if (hasServices()) {
-      @for (service of services(); track service.id) {
-        <app-service-card
-          [name]="service.name"
-          [type]="service.type"
-          [status]="service.status"
-          [url]="service.url"
-        />
+    } @else if (hasDashboardItems()) {
+      @for (vm of vms(); track vm.id) {
+        <app-vm-card [vm]="vm" />
+      }
+
+      @if (unassignedServices().length > 0) {
+        <ui-stack>
+          <ui-text variant="muted">Unassigned services</ui-text>
+
+          @for (service of unassignedServices(); track service.id) {
+            <app-service-card
+              [name]="service.name"
+              [type]="service.type"
+              [status]="service.status"
+              [url]="service.url"
+            />
+          }
+        </ui-stack>
       }
     } @else {
-      <ui-text variant="muted">No services found.</ui-text>
+      <ui-text variant="muted">No VMs or services found.</ui-text>
     }
   </ui-stack>
 </app-shell>

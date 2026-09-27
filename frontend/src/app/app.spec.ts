@@ -14,14 +14,23 @@ describe('App', () => {
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(App);
+    const http = TestBed.inject(HttpTestingController);
     const app = fixture.componentInstance;
+
+    http.expectOne('/api/vms').flush([]);
+    http.expectOne('/api/services').flush([]);
+
     expect(app).toBeTruthy();
+    http.verify();
   });
 
-  it('should render services from the services endpoint', async () => {
+  it('should render services grouped by VM', async () => {
     const fixture = TestBed.createComponent(App);
     const http = TestBed.inject(HttpTestingController);
 
+    http.expectOne('/api/vms').flush([
+      { id: '100', name: 'Docker VM' },
+    ]);
     http.expectOne('/api/services').flush([
       { id: 'nextcloud', name: 'Nextcloud', status: 'Up', vmId: '100' },
     ]);
@@ -31,7 +40,9 @@ describe('App', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain('Homelab Monitor');
+    expect(compiled.textContent).toContain('Docker VM');
     expect(compiled.textContent).toContain('Nextcloud');
     expect(compiled.textContent).toContain('Online');
+    http.verify();
   });
 });

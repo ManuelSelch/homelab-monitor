@@ -1,0 +1,31 @@
+<section hlmCard>
+  <div hlmCardHeader>
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <ui-title>{{ vm().name }}</ui-title>
+        <ui-text size="sm" variant="muted">
+          {{ vm().services.length }} service{{ vm().services.length === 1 ? '' : 's' }}
+        </ui-text>
+      </div>
+
+      <ui-badge [variant]="badge()">{{ vm().status }}</ui-badge>
+    </div>
+  </div>
+
+  <div hlmCardContent>
+    @if (vm().services.length > 0) {
+      <ui-stack>
+        @for (service of vm().services; track service.id) {
+          <app-service-card
+            [name]="service.name"
+            [type]="service.type"
+            [status]="service.status"
+            [url]="service.url"
+          />
+        }
+      </ui-stack>
+    } @else {
+      <ui-text size="sm" variant="muted">No services assigned to this VM.</ui-text>
+    }
+  </div>
+</section>
