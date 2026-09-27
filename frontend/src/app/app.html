@@ -1,10 +1,18 @@
 <app-shell title="Homelab Monitor" subtitle="Services & infrastructure health">
-  <app-service-card
-    name="Nextcloud"
-    type="Cloud Service"
-    status="Online"
-    url="https://nextcloud.com"
-  />
+  <ui-stack>
+    <app-service-card
+      name="Nextcloud"
+      type="Apps"
+      status="Online"
+      url="https://nextcloud.com"
+    />
+
+    <app-service-card
+      name="Proxmox"
+      type="Infra"
+      status="Offline"
+    />
+  </ui-stack>
 </app-shell>
 
 <router-outlet />
