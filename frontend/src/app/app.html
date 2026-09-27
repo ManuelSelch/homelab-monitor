@@ -1,17 +1,21 @@
 <app-shell title="Homelab Monitor" subtitle="Services & infrastructure health">
   <ui-stack>
-    <app-service-card
-      name="Nextcloud"
-      type="Apps"
-      status="Online"
-      url="https://nextcloud.com"
-    />
-
-    <app-service-card
-      name="Proxmox"
-      type="Infra"
-      status="Offline"
-    />
+    @if (isLoading()) {
+      <ui-text variant="muted">Loading services…</ui-text>
+    } @else if (error()) {
+      <ui-text variant="muted">{{ error() }}</ui-text>
+    } @else if (hasServices()) {
+      @for (service of services(); track service.id) {
+        <app-service-card
+          [name]="service.name"
+          [type]="service.type"
+          [status]="service.status"
+          [url]="service.url"
+        />
+      }
+    } @else {
+      <ui-text variant="muted">No services found.</ui-text>
+    }
   </ui-stack>
 </app-shell>
 

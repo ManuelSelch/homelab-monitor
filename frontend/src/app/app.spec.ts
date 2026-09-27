@@ -1,3 +1,5 @@
+import { provideHttpClient } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
 
@@ -5,6 +7,7 @@ describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [provideHttpClient(), provideHttpClientTesting()],
     })
       .compileComponents();
   });
@@ -15,10 +18,20 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should render services from the overview endpoint', async () => {
     const fixture = TestBed.createComponent(App);
+    const http = TestBed.inject(HttpTestingController);
+
+    http.expectOne('/api/overview').flush({
+      services: [{ id: 'nextcloud', name: 'Nextcloud', status: 'Up' }],
+    });
+
+    fixture.detectChanges();
     await fixture.whenStable();
+
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, frontend');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Homelab Monitor');
+    expect(compiled.textContent).toContain('Nextcloud');
+    expect(compiled.textContent).toContain('Online');
   });
 });
