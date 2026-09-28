@@ -1,4 +1,4 @@
-package de.selch.homelabmonitor.backend.logs;
+package de.selch.homelabmonitor.backend.logs.errors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

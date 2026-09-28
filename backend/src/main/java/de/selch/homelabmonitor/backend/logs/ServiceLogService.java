@@ -1,8 +1,9 @@
 package de.selch.homelabmonitor.backend.logs;
 
-import de.selch.homelabmonitor.backend.services.HomelabService;
-import de.selch.homelabmonitor.backend.services.ServiceNotFoundException;
-import de.selch.homelabmonitor.backend.services.ServiceRepository;
+import de.selch.homelabmonitor.backend.logs.errors.LogLimitExceededException;
+import de.selch.homelabmonitor.backend.logs.errors.UnsupportedLogSourceException;
+import de.selch.homelabmonitor.backend.logs.infra.LokiClient;
+import de.selch.homelabmonitor.backend.services.infra.ServiceRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

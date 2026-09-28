@@ -1,4 +1,4 @@
-package de.selch.homelabmonitor.backend.logs;
+package de.selch.homelabmonitor.backend.logs.errors;
 
 public class LogLimitExceededException extends RuntimeException {
     public LogLimitExceededException(int value, int max) {

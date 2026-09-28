@@ -1,7 +1,10 @@
-package de.selch.homelabmonitor.backend.services;
+package de.selch.homelabmonitor.backend.services.infra;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import de.selch.homelabmonitor.backend.services.HomelabService;
+import de.selch.homelabmonitor.backend.services.errors.ServiceConfigurationException;
+import de.selch.homelabmonitor.backend.services.errors.ServiceNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
