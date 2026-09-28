@@ -83,9 +83,6 @@ export class App {
 
   protected closeLogs(): void {
     this.logDrawerService.set(null);
-    this.logs.set('');
-    this.logsError.set(null);
-    this.logsLoading.set(false);
   }
 
   private loadLogs(serviceId: string): void {

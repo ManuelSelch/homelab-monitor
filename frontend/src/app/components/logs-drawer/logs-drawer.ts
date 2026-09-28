@@ -12,7 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './logs-drawer.html',
 })
 export class LogsDrawer {
-  logDrawerService = input<DashboardService>();
+  logDrawerService = input.required<DashboardService | null>();
 
   logsClosed = output();
 
