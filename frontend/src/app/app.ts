@@ -28,7 +28,7 @@ type HomelabService = {
 };
 
 type ServiceStatusFilter = VmStatus | 'all';
-type MachineFilter = string | 'all' | 'unassigned';
+type MachineFilter = string | 'all';
 
 type DashboardService = VmService & {
   machineId?: string;
@@ -73,9 +73,7 @@ export class App {
         service.name.toLowerCase().includes(search) ||
         service.type.toLowerCase().includes(search) ||
         service.machineName.toLowerCase().includes(search);
-      const matchesMachine =
-        machine === 'all' ||
-        (machine === 'unassigned' ? !service.machineId : service.machineId === machine);
+      const matchesMachine = machine === 'all' || service.machineId === machine;
       const matchesStatus = status === 'all' || service.status === status;
 
       return matchesSearch && matchesMachine && matchesStatus;

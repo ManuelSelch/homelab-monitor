@@ -78,9 +78,6 @@
                 @for (vm of vms(); track vm.id) {
                   <option [value]="vm.id">{{ vm.name }}</option>
                 }
-                @if (unassignedServices().length > 0) {
-                  <option value="unassigned">Unassigned</option>
-                }
               </select>
 
               <select
