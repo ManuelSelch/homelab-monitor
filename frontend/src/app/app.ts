@@ -8,19 +8,18 @@ import { AppShell } from './components/app-shell/app-shell';
 import { DashboardService, MachineWithServices } from './domain/dashboard';
 import { MachineStatus } from './domain/machine';
 import { MonitoredService } from './domain/monitored-service';
-import { badgeForStatus, UiBadge } from './ui/badge/badge';
+import { badgeForStatus } from './ui/badge/badge';
 import { UiStack } from './ui/stack/stack';
 import { UiText } from './ui/text/text';
-import { UiTitle } from './ui/title/title';
 import { DashboardStats } from './components/dashboard-stats/dashboard-stats';
 import { MachinesOverview } from './components/machines-overview/machines-overview';
 import { ServicesTable } from './components/services-table/services-table';
+import { LogsDrawer } from './components/logs-drawer/logs-drawer';
 
-type ServiceStatusFilter = MachineStatus | 'all';
 type MachineFilter = string | 'all';
 
 @Component({
-  imports: [RouterOutlet, AppShell, UiBadge, UiStack, UiText, UiTitle, DashboardStats, MachinesOverview, ServicesTable],
+  imports: [RouterOutlet, AppShell, UiStack, UiText, DashboardStats, MachinesOverview, ServicesTable, LogsDrawer],
   selector: 'app-root',
   templateUrl: './app.html',
 })

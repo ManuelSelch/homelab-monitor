@@ -1,0 +1,62 @@
+import { Component, DestroyRef, inject, input, output, signal } from '@angular/core';
+import { UiTitle } from '../../ui/title/title';
+import { UiText } from '../../ui/text/text';
+import { badgeForStatus, UiBadge } from '../../ui/badge/badge';
+import { DashboardService } from '../../domain/dashboard';
+import { HomelabApi } from '../../api/homelab-api';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+@Component({
+  imports: [UiTitle, UiText, UiBadge],
+  selector: 'app-logs-drawer',
+  templateUrl: './logs-drawer.html',
+})
+export class LogsDrawer {
+  logDrawerService = input<DashboardService>();
+
+  logsClosed = output();
+
+  private readonly homelabApi = inject(HomelabApi);
+  private readonly destroyRef = inject(DestroyRef);
+  
+  protected readonly logs = signal('');
+  protected readonly logsLoading = signal(false);
+  protected readonly logsError = signal<string | null>(null);
+
+  protected badgeForStatus = badgeForStatus;
+
+  protected refreshLogs(): void {
+    const service = this.logDrawerService();
+
+    if (service) {
+      this.loadLogs(service.id);
+    }
+  }
+
+  protected closeLogs(): void {
+    this.logs.set('');
+    this.logsError.set(null);
+    this.logsLoading.set(false);
+    this.logsClosed.emit();
+  }
+
+  private loadLogs(serviceId: string): void {
+    this.logs.set('');
+    this.logsError.set(null);
+    this.logsLoading.set(true);
+
+    this.homelabApi
+      .getServiceLogs(serviceId)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (logs) => {
+          this.logs.set(logs || 'No logs available.');
+          this.logsLoading.set(false);
+        },
+        error: () => {
+          this.logsError.set('Could not load service logs.');
+          this.logsLoading.set(false);
+        },
+      });
+  }
+}

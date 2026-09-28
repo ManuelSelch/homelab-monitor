@@ -1,0 +1,25 @@
+<div class="fixed inset-0 z-40 bg-black/30" (click)="closeLogs()"></div>
+<aside class="fixed right-0 top-0 z-50 flex h-dvh w-full max-w-2xl flex-col border-l bg-card shadow-2xl">
+    <div class="flex items-start justify-between gap-4 border-b p-4">
+        <div>
+        <ui-title order="2">Logs: {{ logDrawerService()!.name }}</ui-title>
+        <ui-text size="sm" variant="muted">{{ logDrawerService()!.machineName }} · {{ logDrawerService()!.type }}</ui-text>
+        </div>
+        <button class="rounded-md border px-3 py-1.5 text-sm font-medium hover:bg-muted" type="button" (click)="closeLogs()">Close</button>
+    </div>
+
+    <div class="flex items-center justify-between border-b p-4">
+        <ui-badge [variant]="badgeForStatus(logDrawerService()!.status)">{{ logDrawerService()!.status }}</ui-badge>
+        <button class="rounded-md border px-3 py-1.5 text-sm font-medium hover:bg-muted" type="button" (click)="refreshLogs()">Refresh</button>
+    </div>
+
+    <div class="min-h-0 flex-1 overflow-auto bg-slate-950 p-4 text-slate-100">
+        @if (logsLoading()) {
+        <p class="text-sm text-slate-400">Loading logs…</p>
+        } @else if (logsError()) {
+        <p class="text-sm text-red-300">{{ logsError() }}</p>
+        } @else {
+        <pre class="whitespace-pre-wrap wrap-break-word font-mono text-xs leading-relaxed">{{ logs() }}</pre>
+        }
+    </div>
+</aside>
