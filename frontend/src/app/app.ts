@@ -3,6 +3,8 @@ import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { forkJoin } from 'rxjs';
+import { MachineDto } from './api/machine.dto';
+import { ServiceDto } from './api/service.dto';
 import { AppShell } from './components/app-shell/app-shell';
 import { DashboardService, MachineWithServices } from './domain/dashboard';
 import { MachineStatus } from './domain/machine';
@@ -11,23 +13,6 @@ import { BadgeVariant, UiBadge } from './ui/badge/badge';
 import { UiStack } from './ui/stack/stack';
 import { UiText } from './ui/text/text';
 import { UiTitle } from './ui/title/title';
-
-type MachineDto = {
-  id: string;
-  name: string;
-  status: string;
-  cpuUsage: number;
-  memoryUsage: number;
-};
-
-type ServiceDto = {
-  id: string;
-  name: string;
-  status: string;
-  machineId?: string;
-  type?: string;
-  url?: string;
-};
 
 type ServiceStatusFilter = MachineStatus | 'all';
 type MachineFilter = string | 'all';
