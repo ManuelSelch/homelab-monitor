@@ -20,7 +20,7 @@
 </app-shell>
 
 @if (logDrawerService()) {
-  <app-logs-drawer [logDrawerService]="logDrawerService()" (logsClosed)="closeLogs()"/>
+  <app-logs-drawer [service]="logDrawerService()" (logsClosed)="closeLogs()"/>
 }
 
 <router-outlet />
