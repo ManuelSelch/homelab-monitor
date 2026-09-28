@@ -31,7 +31,6 @@ export class App {
   protected readonly isLoading = signal(true);
   protected readonly error = signal<string | null>(null);
   protected readonly machines = signal<MachineWithServices[]>([]);
-  protected readonly unassignedServices = signal<MonitoredService[]>([]);
   protected readonly allServices = signal<DashboardService[]>([]);
 
   protected readonly machineFilter = signal<MachineFilter>('all');
@@ -41,9 +40,7 @@ export class App {
   protected readonly logsLoading = signal(false);
   protected readonly logsError = signal<string | null>(null);
 
-  protected readonly hasDashboardItems = computed(
-    () => this.machines().length > 0 || this.unassignedServices().length > 0,
-  );
+  protected readonly hasDashboardItems = computed(() => this.machines().length > 0,);
 
   constructor() {
     this.homelabApi
@@ -54,7 +51,6 @@ export class App {
           const dashboard = toDashboardViewModel(machines, services);
 
           this.machines.set(dashboard.machines);
-          this.unassignedServices.set(dashboard.unassignedServices);
           this.allServices.set(dashboard.allServices);
           this.error.set(null);
           this.isLoading.set(false);
