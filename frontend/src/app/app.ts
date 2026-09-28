@@ -33,9 +33,8 @@ export class App {
   protected readonly machines = signal<MachineWithServices[]>([]);
   protected readonly unassignedServices = signal<MonitoredService[]>([]);
   protected readonly allServices = signal<DashboardService[]>([]);
-  protected readonly searchTerm = signal('');
+
   protected readonly machineFilter = signal<MachineFilter>('all');
-  protected readonly statusFilter = signal<ServiceStatusFilter>('all');
 
   protected readonly logDrawerService = signal<DashboardService | null>(null);
   protected readonly logs = signal('');
@@ -67,23 +66,12 @@ export class App {
       });
   }
 
-  protected badgeForStatus = badgeForStatus;
-
-  protected setSearchTerm(event: Event): void {
-    this.searchTerm.set((event.target as HTMLInputElement).value);
-  }
-
   protected setMachineFilter(machineId: string): void {
     this.machineFilter.set(machineId);
   }
 
-  protected setMachineFilterFromEvent(event: Event): void {
-    this.machineFilter.set((event.target as HTMLSelectElement).value as MachineFilter);
-  }
-
-  protected setStatusFilter(event: Event): void {
-    this.statusFilter.set((event.target as HTMLSelectElement).value as ServiceStatusFilter);
-  }
+  //#region logs
+  protected badgeForStatus = badgeForStatus;
 
   protected openLogs(service: DashboardService): void {
     this.logDrawerService.set(service);
@@ -124,6 +112,7 @@ export class App {
         },
       });
   }
+  //#endregion
 }
 
 function toDashboardViewModel(machines: MachineDto[], services: ServiceDto[]) {
