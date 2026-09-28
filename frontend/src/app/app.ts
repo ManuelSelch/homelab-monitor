@@ -14,12 +14,13 @@ import { UiText } from './ui/text/text';
 import { UiTitle } from './ui/title/title';
 import { DashboardStats } from './components/dashboard-stats/dashboard-stats';
 import { MachinesOverview } from './components/machines-overview/machines-overview';
+import { ServicesTable } from './components/services-table/services-table';
 
 type ServiceStatusFilter = MachineStatus | 'all';
 type MachineFilter = string | 'all';
 
 @Component({
-  imports: [RouterOutlet, AppShell, UiBadge, UiStack, UiText, UiTitle, DashboardStats, MachinesOverview],
+  imports: [RouterOutlet, AppShell, UiBadge, UiStack, UiText, UiTitle, DashboardStats, MachinesOverview, ServicesTable],
   selector: 'app-root',
   templateUrl: './app.html',
 })
@@ -44,24 +45,6 @@ export class App {
   protected readonly hasDashboardItems = computed(
     () => this.machines().length > 0 || this.unassignedServices().length > 0,
   );
-
-  protected readonly filteredServices = computed(() => {
-    const search = this.searchTerm().trim().toLowerCase();
-    const machine = this.machineFilter();
-    const status = this.statusFilter();
-
-    return this.allServices().filter((service) => {
-      const matchesSearch =
-        search.length === 0 ||
-        service.name.toLowerCase().includes(search) ||
-        service.type.toLowerCase().includes(search) ||
-        service.machineName.toLowerCase().includes(search);
-      const matchesMachine = machine === 'all' || service.machineId === machine;
-      const matchesStatus = status === 'all' || service.status === status;
-
-      return matchesSearch && matchesMachine && matchesStatus;
-    });
-  });
 
   constructor() {
     this.homelabApi

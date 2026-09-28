@@ -1,0 +1,77 @@
+<section class="rounded-xl border bg-card shadow-sm">
+    <div class="border-b p-4">
+        <ui-stack>
+        <div class="flex flex-col gap-1">
+            <ui-title order="2">Services</ui-title>
+            <ui-text size="sm" variant="muted">All services in one table. Filter by machine, status, or text.</ui-text>
+        </div>
+
+        <div class="grid gap-3 md:grid-cols-[1fr_220px_180px]">
+            <input
+            class="h-10 rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
+            placeholder="Search services…"
+            [value]="searchTerm()"
+            (input)="setSearchTerm($event)"
+            />
+
+            <select
+            class="h-10 rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
+            [value]="machineFilter()"
+            (change)="setMachineFilter($event)"
+            >
+            <option value="all">All machines</option>
+            @for (machine of machines(); track machine.id) {
+                <option [value]="machine.id">{{ machine.name }}</option>
+            }
+            </select>
+
+            <select
+            class="h-10 rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
+            [value]="statusFilter()"
+            (change)="setStatusFilter($event)"
+            >
+            <option value="all">All statuses</option>
+            <option value="Online">Online</option>
+            <option value="Warning">Warning</option>
+            <option value="Offline">Offline</option>
+            </select>
+        </div>
+        </ui-stack>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+        <thead class="bg-muted/60 text-left text-muted-foreground">
+            <tr>
+            <th class="px-4 py-3 font-medium">Service</th>
+            <th class="px-4 py-3 font-medium">Machine</th>
+            <th class="px-4 py-3 font-medium">Type</th>
+            <th class="px-4 py-3 font-medium">Status</th>
+            <th class="px-4 py-3 text-right font-medium">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y">
+            @for (service of filteredServices(); track service.id) {
+            <tr class="hover:bg-muted/40">
+                <td class="px-4 py-3 font-medium">{{ service.name }}</td>
+                <td class="px-4 py-3 text-muted-foreground">{{ service.machineName }}</td>
+                <td class="px-4 py-3 text-muted-foreground">{{ service.type }}</td>
+                <td class="px-4 py-3"><ui-badge [variant]="badgeForStatus(service.status)">{{ service.status }}</ui-badge></td>
+                <td class="px-4 py-3">
+                <div class="flex justify-end gap-2">
+                    @if (service.url) {
+                    <a class="rounded-md border px-2.5 py-1.5 text-xs font-medium hover:bg-muted" [href]="service.url" target="_blank" rel="noreferrer">Open</a>
+                    }
+                    <button class="rounded-md border px-2.5 py-1.5 text-xs font-medium hover:bg-muted" type="button" (click)="openLogs(service)">Logs</button>
+                </div>
+                </td>
+            </tr>
+            } @empty {
+            <tr>
+                <td class="px-4 py-8 text-center text-muted-foreground" colspan="5">No services match the current filters.</td>
+            </tr>
+            }
+        </tbody>
+        </table>
+    </div>
+</section>
