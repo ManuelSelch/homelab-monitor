@@ -11,6 +11,7 @@
         [machines]="machines()" [allServices]="allServices()"
         [selectedMachine]="machineFilter()"
         (machineSelected)="setMachineFilter($event)"
+        (logsRequested)="openLogs($event)"
       />
     } @else {
       <ui-text variant="muted">No Machines or services found.</ui-text>
