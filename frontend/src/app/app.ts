@@ -12,12 +12,13 @@ import { BadgeVariant, UiBadge } from './ui/badge/badge';
 import { UiStack } from './ui/stack/stack';
 import { UiText } from './ui/text/text';
 import { UiTitle } from './ui/title/title';
+import { DashboardStats } from './components/dashboard-stats/dashboard-stats';
 
 type ServiceStatusFilter = MachineStatus | 'all';
 type MachineFilter = string | 'all';
 
 @Component({
-  imports: [RouterOutlet, AppShell, UiBadge, UiStack, UiText, UiTitle],
+  imports: [RouterOutlet, AppShell, UiBadge, UiStack, UiText, UiTitle, DashboardStats],
   selector: 'app-root',
   templateUrl: './app.html',
 })
@@ -80,10 +81,6 @@ export class App {
           this.isLoading.set(false);
         },
       });
-  }
-
-  protected serviceCountByStatus(status: MachineStatus): number {
-    return this.allServices().filter((service) => service.status === status).length;
   }
 
   protected badgeForStatus(status: MachineStatus): BadgeVariant {
