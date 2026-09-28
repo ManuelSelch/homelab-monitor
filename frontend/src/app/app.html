@@ -7,7 +7,11 @@
     } @else if (hasDashboardItems()) {
       <app-dashboard-stats [machines]="machines()" [allServices]="allServices()"/>
       <app-machines-overview [machines]="machines()" (machineSelected)="setMachineFilter($event)"/>
-      <app-services-table [machines]="machines()" [allServices]="allServices()"/>
+      <app-services-table 
+        [machines]="machines()" [allServices]="allServices()"
+        [selectedMachine]="machineFilter()"
+        (machineSelected)="setMachineFilter($event)"
+      />
     } @else {
       <ui-text variant="muted">No Machines or services found.</ui-text>
     }

@@ -17,16 +17,17 @@ type MachineFilter = string | 'all';
 export class ServicesTable {
   machines = input.required<MachineWithServices[]>();
   allServices = input.required<DashboardService[]>();
+  selectedMachine = input.required<MachineFilter>();
 
+  machineSelected = output<MachineFilter>();
   logsRequested = output<DashboardService>();
 
   protected searchTerm = signal('');
   protected statusFilter = signal<ServiceStatusFilter>('all')
-  protected machineFilter = signal<MachineFilter>('all')
 
   protected filteredServices = computed(() => {
     const search = this.searchTerm().trim().toLowerCase();
-    const machine = this.machineFilter();
+    const machine = this.selectedMachine();
     const status = this.statusFilter();
 
     return this.allServices().filter((service) => {
@@ -48,8 +49,8 @@ export class ServicesTable {
   protected setStatusFilter(event: Event) {
     this.statusFilter.set((event.target as HTMLInputElement).value as ServiceStatusFilter);
   }
-  protected setMachineFilter(event: Event) {
-    this.machineFilter.set((event.target as HTMLInputElement).value);
+  protected selectMachine(event: Event) {
+    this.machineSelected.emit((event.target as HTMLInputElement).value as MachineFilter);
   }
   protected openLogs(service: DashboardService) {
     this.logsRequested.emit(service);

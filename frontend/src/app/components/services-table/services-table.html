@@ -16,8 +16,8 @@
 
             <select
             class="h-10 rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
-            [value]="machineFilter()"
-            (change)="setMachineFilter($event)"
+            [value]="selectedMachine()"
+            (change)="selectMachine($event)"
             >
             <option value="all">All machines</option>
             @for (machine of machines(); track machine.id) {
