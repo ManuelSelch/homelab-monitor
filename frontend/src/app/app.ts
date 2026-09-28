@@ -28,7 +28,7 @@ export class App {
 
   protected readonly isLoading = signal(true);
   protected readonly error = signal<string | null>(null);
-  protected readonly vms = signal<MachineWithServices[]>([]);
+  protected readonly machines = signal<MachineWithServices[]>([]);
   protected readonly unassignedServices = signal<MonitoredService[]>([]);
   protected readonly allServices = signal<DashboardService[]>([]);
   protected readonly searchTerm = signal('');
@@ -41,7 +41,7 @@ export class App {
   protected readonly logsError = signal<string | null>(null);
 
   protected readonly hasDashboardItems = computed(
-    () => this.vms().length > 0 || this.unassignedServices().length > 0,
+    () => this.machines().length > 0 || this.unassignedServices().length > 0,
   );
 
   protected readonly filteredServices = computed(() => {
@@ -64,22 +64,22 @@ export class App {
 
   constructor() {
     forkJoin({
-      vms: this.http.get<MachineDto[]>('/api/machines'),
+      machines: this.http.get<MachineDto[]>('/api/machines'),
       services: this.http.get<ServiceDto[]>('/api/services'),
     })
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: ({ vms, services }) => {
-          const dashboard = toDashboardViewModel(vms, services);
+        next: ({ machines, services }) => {
+          const dashboard = toDashboardViewModel(machines, services);
 
-          this.vms.set(dashboard.vms);
+          this.machines.set(dashboard.machines);
           this.unassignedServices.set(dashboard.unassignedServices);
           this.allServices.set(dashboard.allServices);
           this.error.set(null);
           this.isLoading.set(false);
         },
         error: () => {
-          this.error.set('Could not load VMs and services.');
+          this.error.set('Could not load machines and services.');
           this.isLoading.set(false);
         },
       });
@@ -157,8 +157,8 @@ export class App {
   }
 }
 
-function toDashboardViewModel(vms: MachineDto[], services: ServiceDto[]) {
-  const machineById = new Map(vms.map((vm) => [vm.id, vm]));
+function toDashboardViewModel(machines: MachineDto[], services: ServiceDto[]) {
+  const machineById = new Map(machines.map((machine) => [machine.id, machine]));
   const servicesByMachineId = new Map<string, ServiceDto[]>();
 
   for (const service of services) {
@@ -169,14 +169,14 @@ function toDashboardViewModel(vms: MachineDto[], services: ServiceDto[]) {
     servicesByMachineId.set(service.machineId, [...(servicesByMachineId.get(service.machineId) ?? []), service]);
   }
 
-  const vmsWithServices = vms.map((vm) => {
-    const vmServices = (servicesByMachineId.get(vm.id) ?? []).map(toServiceViewModel);
+  const machinesWithServices = machines.map((machine) => {
+    const services = (servicesByMachineId.get(machine.id) ?? []).map(toServiceViewModel);
 
     return {
-      id: vm.id,
-      name: vm.name,
-      status: vm.status ? toStatus(vm.status) : toVmStatusFromServices(vmServices),
-      services: vmServices,
+      id: machine.id,
+      name: machine.name,
+      status: machine.status ? toStatus(machine.status) : toMachineStatusFromServices(services),
+      services: services,
     };
   });
 
@@ -185,7 +185,7 @@ function toDashboardViewModel(vms: MachineDto[], services: ServiceDto[]) {
     .map(toServiceViewModel);
 
   return {
-    vms: vmsWithServices,
+    machines: machinesWithServices,
     unassignedServices,
     allServices: services.map((service) => {
       const machine = service.machineId ? machineById.get(service.machineId) : undefined;
@@ -209,7 +209,7 @@ function toServiceViewModel(service: ServiceDto): MonitoredService {
   };
 }
 
-function toVmStatusFromServices(services: MonitoredService[]): MachineStatus {
+function toMachineStatusFromServices(services: MonitoredService[]): MachineStatus {
   if (services.some((service) => service.status === 'Warning')) {
     return 'Warning';
   }
