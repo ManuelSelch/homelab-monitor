@@ -7,34 +7,7 @@
     } @else if (hasDashboardItems()) {
       <app-dashboard-stats [machines]="machines()" [allServices]="allServices()"/>
 
-      <section class="rounded-xl border bg-card p-4 shadow-sm">
-        <ui-stack>
-          <div class="flex flex-col gap-1">
-            <ui-title order="2">Machines</ui-title>
-            <ui-text size="sm" variant="muted">Compact overview grouped by machine.</ui-text>
-          </div>
-
-          <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-            @for (machine of machines(); track machine.id) {
-              <button
-                type="button"
-                class="rounded-lg border p-3 text-left transition hover:border-primary hover:bg-muted/50"
-                (click)="setMachineFilter(machine.id)"
-              >
-                <div class="flex items-start justify-between gap-3">
-                  <div>
-                    <p class="font-medium">{{ machine.name }}</p>
-                    <ui-text size="sm" variant="muted">
-                      {{ machine.services.length }} service{{ machine.services.length === 1 ? '' : 's' }}
-                    </ui-text>
-                  </div>
-                  <ui-badge [variant]="badgeForStatus(machine.status)">{{ machine.status }}</ui-badge>
-                </div>
-              </button>
-            }
-          </div>
-        </ui-stack>
-      </section>
+      <app-machines-overview [machines]="machines()" (machineSelected)="setMachineFilter($event)"/>
 
       <section class="rounded-xl border bg-card shadow-sm">
         <div class="border-b p-4">
@@ -114,7 +87,7 @@
         </div>
       </section>
     } @else {
-      <ui-text variant="muted">No VMs or services found.</ui-text>
+      <ui-text variant="muted">No Machines or services found.</ui-text>
     }
   </ui-stack>
 </app-shell>
@@ -141,7 +114,7 @@
       } @else if (logsError()) {
         <p class="text-sm text-red-300">{{ logsError() }}</p>
       } @else {
-        <pre class="whitespace-pre-wrap break-words font-mono text-xs leading-relaxed">{{ logs() }}</pre>
+        <pre class="whitespace-pre-wrap wrap-break-word font-mono text-xs leading-relaxed">{{ logs() }}</pre>
       }
     </div>
   </aside>

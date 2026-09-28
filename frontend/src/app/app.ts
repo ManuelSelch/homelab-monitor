@@ -8,17 +8,18 @@ import { AppShell } from './components/app-shell/app-shell';
 import { DashboardService, MachineWithServices } from './domain/dashboard';
 import { MachineStatus } from './domain/machine';
 import { MonitoredService } from './domain/monitored-service';
-import { BadgeVariant, UiBadge } from './ui/badge/badge';
+import { badgeForStatus, UiBadge } from './ui/badge/badge';
 import { UiStack } from './ui/stack/stack';
 import { UiText } from './ui/text/text';
 import { UiTitle } from './ui/title/title';
 import { DashboardStats } from './components/dashboard-stats/dashboard-stats';
+import { MachinesOverview } from './components/machines-overview/machines-overview';
 
 type ServiceStatusFilter = MachineStatus | 'all';
 type MachineFilter = string | 'all';
 
 @Component({
-  imports: [RouterOutlet, AppShell, UiBadge, UiStack, UiText, UiTitle, DashboardStats],
+  imports: [RouterOutlet, AppShell, UiBadge, UiStack, UiText, UiTitle, DashboardStats, MachinesOverview],
   selector: 'app-root',
   templateUrl: './app.html',
 })
@@ -83,16 +84,7 @@ export class App {
       });
   }
 
-  protected badgeForStatus(status: MachineStatus): BadgeVariant {
-    switch (status) {
-      case 'Online':
-        return 'success';
-      case 'Warning':
-        return 'warning';
-      case 'Offline':
-        return 'danger';
-    }
-  }
+  protected badgeForStatus = badgeForStatus;
 
   protected setSearchTerm(event: Event): void {
     this.searchTerm.set((event.target as HTMLInputElement).value);

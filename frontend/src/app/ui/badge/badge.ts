@@ -1,6 +1,18 @@
 import { Component, computed, input } from '@angular/core';
+import { MachineStatus } from '../../domain/machine';
 
 export type BadgeVariant = 'default' | 'success' | 'warning' | 'danger' | 'muted';
+
+export function badgeForStatus(status: MachineStatus): BadgeVariant {
+  switch (status) {
+    case 'Online':
+      return 'success';
+    case 'Warning':
+      return 'warning';
+    case 'Offline':
+      return 'danger';
+  }
+}
 
 @Component({
   selector: 'ui-badge',
