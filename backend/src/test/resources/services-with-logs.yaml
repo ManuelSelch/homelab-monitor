@@ -1,0 +1,8 @@
+services:
+  - id: nextcloud
+    name: Nextcloud
+    status: Up
+    machineId: "100"
+    logs:
+      source: loki
+      selector: '{service="nextcloud"}'

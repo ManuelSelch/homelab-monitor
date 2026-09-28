@@ -32,5 +32,12 @@ public class ServiceRepository {
         }
     }
 
+    public  HomelabService find(String id) {
+        return findAll().stream()
+            .filter(s -> s.id().equals(id))
+            .findFirst()
+            .orElseThrow(() -> new ServiceNotFoundException(id));
+    }
+
     private record ServicesConfig(List<HomelabService> services) {}
 }
