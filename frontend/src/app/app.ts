@@ -4,13 +4,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { AppShell } from './components/app-shell/app-shell';
-import { VmService, VmStatus, VmWithServices } from './components/vm-card/vm-card';
+import { DashboardService, MachineWithServices } from './domain/dashboard';
+import { MachineStatus } from './domain/machine';
+import { MonitoredService } from './domain/monitored-service';
 import { BadgeVariant, UiBadge } from './ui/badge/badge';
 import { UiStack } from './ui/stack/stack';
 import { UiText } from './ui/text/text';
 import { UiTitle } from './ui/title/title';
 
-type HomelabMachine = {
+type MachineDto = {
   id: string;
   name: string;
   status: string;
@@ -18,7 +20,7 @@ type HomelabMachine = {
   memoryUsage: number;
 };
 
-type HomelabService = {
+type ServiceDto = {
   id: string;
   name: string;
   status: string;
@@ -27,13 +29,8 @@ type HomelabService = {
   url?: string;
 };
 
-type ServiceStatusFilter = VmStatus | 'all';
+type ServiceStatusFilter = MachineStatus | 'all';
 type MachineFilter = string | 'all';
-
-type DashboardService = VmService & {
-  machineId?: string;
-  machineName: string;
-};
 
 @Component({
   imports: [RouterOutlet, AppShell, UiBadge, UiStack, UiText, UiTitle],
@@ -46,8 +43,8 @@ export class App {
 
   protected readonly isLoading = signal(true);
   protected readonly error = signal<string | null>(null);
-  protected readonly vms = signal<VmWithServices[]>([]);
-  protected readonly unassignedServices = signal<VmService[]>([]);
+  protected readonly vms = signal<MachineWithServices[]>([]);
+  protected readonly unassignedServices = signal<MonitoredService[]>([]);
   protected readonly allServices = signal<DashboardService[]>([]);
   protected readonly searchTerm = signal('');
   protected readonly machineFilter = signal<MachineFilter>('all');
@@ -82,8 +79,8 @@ export class App {
 
   constructor() {
     forkJoin({
-      vms: this.http.get<HomelabMachine[]>('/api/machines'),
-      services: this.http.get<HomelabService[]>('/api/services'),
+      vms: this.http.get<MachineDto[]>('/api/machines'),
+      services: this.http.get<ServiceDto[]>('/api/services'),
     })
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
@@ -103,11 +100,11 @@ export class App {
       });
   }
 
-  protected serviceCountByStatus(status: VmStatus): number {
+  protected serviceCountByStatus(status: MachineStatus): number {
     return this.allServices().filter((service) => service.status === status).length;
   }
 
-  protected badgeForStatus(status: VmStatus): BadgeVariant {
+  protected badgeForStatus(status: MachineStatus): BadgeVariant {
     switch (status) {
       case 'Online':
         return 'success';
@@ -175,9 +172,9 @@ export class App {
   }
 }
 
-function toDashboardViewModel(vms: HomelabMachine[], services: HomelabService[]) {
+function toDashboardViewModel(vms: MachineDto[], services: ServiceDto[]) {
   const machineById = new Map(vms.map((vm) => [vm.id, vm]));
-  const servicesByMachineId = new Map<string, HomelabService[]>();
+  const servicesByMachineId = new Map<string, ServiceDto[]>();
 
   for (const service of services) {
     if (!service.machineId || !machineById.has(service.machineId)) {
@@ -217,7 +214,7 @@ function toDashboardViewModel(vms: HomelabMachine[], services: HomelabService[])
   };
 }
 
-function toServiceViewModel(service: HomelabService): VmService {
+function toServiceViewModel(service: ServiceDto): MonitoredService {
   return {
     id: service.id,
     name: service.name,
@@ -227,7 +224,7 @@ function toServiceViewModel(service: HomelabService): VmService {
   };
 }
 
-function toVmStatusFromServices(services: VmService[]): VmStatus {
+function toVmStatusFromServices(services: MonitoredService[]): MachineStatus {
   if (services.some((service) => service.status === 'Warning')) {
     return 'Warning';
   }
@@ -239,7 +236,7 @@ function toVmStatusFromServices(services: VmService[]): VmStatus {
   return 'Online';
 }
 
-function toStatus(status: string | undefined): VmStatus {
+function toStatus(status: string | undefined): MachineStatus {
   switch (status?.toLowerCase()) {
     case 'up':
     case 'online':
