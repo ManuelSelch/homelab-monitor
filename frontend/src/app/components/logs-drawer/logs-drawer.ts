@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, input, output, signal } from '@angular/core';
+import { Component, DestroyRef, effect, inject, input, output, signal } from '@angular/core';
 import { UiTitle } from '../../ui/title/title';
 import { UiText } from '../../ui/text/text';
 import { badgeForStatus, UiBadge } from '../../ui/badge/badge';
@@ -12,7 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './logs-drawer.html',
 })
 export class LogsDrawer {
-  logDrawerService = input.required<DashboardService | null>();
+  service = input.required<DashboardService | null>();
 
   logsClosed = output();
 
@@ -23,10 +23,17 @@ export class LogsDrawer {
   protected readonly logsLoading = signal(false);
   protected readonly logsError = signal<string | null>(null);
 
+  constructor() {
+    effect(() => {
+      if(!this.service()) return;
+      this.refreshLogs();
+    })
+  }
+
   protected badgeForStatus = badgeForStatus;
 
   protected refreshLogs(): void {
-    const service = this.logDrawerService();
+    const service = this.service();
 
     if (service) {
       this.loadLogs(service.id);
