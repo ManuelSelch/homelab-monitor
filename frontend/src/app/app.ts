@@ -1,8 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
-import { forkJoin } from 'rxjs';
+import { HomelabApi } from './api/homelab-api';
 import { MachineDto } from './api/machine.dto';
 import { ServiceDto } from './api/service.dto';
 import { AppShell } from './components/app-shell/app-shell';
@@ -23,7 +22,7 @@ type MachineFilter = string | 'all';
   templateUrl: './app.html',
 })
 export class App {
-  private readonly http = inject(HttpClient);
+  private readonly homelabApi = inject(HomelabApi);
   private readonly destroyRef = inject(DestroyRef);
 
   protected readonly isLoading = signal(true);
@@ -63,10 +62,8 @@ export class App {
   });
 
   constructor() {
-    forkJoin({
-      machines: this.http.get<MachineDto[]>('/api/machines'),
-      services: this.http.get<ServiceDto[]>('/api/services'),
-    })
+    this.homelabApi
+      .getDashboardData()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: ({ machines, services }) => {
@@ -141,8 +138,8 @@ export class App {
     this.logsError.set(null);
     this.logsLoading.set(true);
 
-    this.http
-      .get(`/api/services/${serviceId}/logs`, { responseType: 'text' })
+    this.homelabApi
+      .getServiceLogs(serviceId)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (logs) => {

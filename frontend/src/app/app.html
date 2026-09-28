@@ -8,7 +8,7 @@
       <section class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <div class="rounded-xl border bg-card p-4 shadow-sm">
           <ui-text size="sm" variant="muted">Machines</ui-text>
-          <p class="mt-1 text-2xl font-semibold">{{ vms().length }}</p>
+          <p class="mt-1 text-2xl font-semibold">{{ machines().length }}</p>
         </div>
         <div class="rounded-xl border bg-card p-4 shadow-sm">
           <ui-text size="sm" variant="muted">Services</ui-text>
@@ -32,20 +32,20 @@
           </div>
 
           <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-            @for (vm of vms(); track vm.id) {
+            @for (machine of machines(); track machine.id) {
               <button
                 type="button"
                 class="rounded-lg border p-3 text-left transition hover:border-primary hover:bg-muted/50"
-                (click)="setMachineFilter(vm.id)"
+                (click)="setMachineFilter(machine.id)"
               >
                 <div class="flex items-start justify-between gap-3">
                   <div>
-                    <p class="font-medium">{{ vm.name }}</p>
+                    <p class="font-medium">{{ machine.name }}</p>
                     <ui-text size="sm" variant="muted">
-                      {{ vm.services.length }} service{{ vm.services.length === 1 ? '' : 's' }}
+                      {{ machine.services.length }} service{{ machine.services.length === 1 ? '' : 's' }}
                     </ui-text>
                   </div>
-                  <ui-badge [variant]="badgeForStatus(vm.status)">{{ vm.status }}</ui-badge>
+                  <ui-badge [variant]="badgeForStatus(machine.status)">{{ machine.status }}</ui-badge>
                 </div>
               </button>
             }
@@ -75,8 +75,8 @@
                 (change)="setMachineFilterFromEvent($event)"
               >
                 <option value="all">All machines</option>
-                @for (vm of vms(); track vm.id) {
-                  <option [value]="vm.id">{{ vm.name }}</option>
+                @for (machine of machines(); track machine.id) {
+                  <option [value]="machine.id">{{ machine.name }}</option>
                 }
               </select>
 
