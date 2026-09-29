@@ -18,6 +18,6 @@ export class UiContainer {
       xl: 'max-w-7xl',
     };
 
-    return `mx-auto w-full px-6 ${sizes[this.size()]}`;
+    return `block mx-auto w-full px-6 ${sizes[this.size()]}`;
   });
 }

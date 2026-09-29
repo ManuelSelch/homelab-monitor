@@ -104,6 +104,7 @@ export function boxClasses(options: BoxClassOptions = {}): string {
   };
 
   return [
+    "block",
     variants[resolved.variant],
     paddings[resolved.padding],
     borders[resolved.border],
