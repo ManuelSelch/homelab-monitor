@@ -1,0 +1,15 @@
+<button
+type="button"
+class="rounded-lg border p-3 text-left transition hover:border-primary hover:bg-muted/50"
+(click)="clickMachine()"
+>
+    <div class="flex items-start justify-between gap-3">
+        <div>
+        <p class="font-medium">{{ machine().name }}</p>
+        <ui-text size="sm" variant="muted">
+            {{ machine().services.length }} service{{ machine().services.length === 1 ? '' : 's' }}
+        </ui-text>
+        </div>
+        <ui-badge [variant]="badgeForStatus(machine().status)">{{ machine().status }}</ui-badge>
+    </div>
+</button>
