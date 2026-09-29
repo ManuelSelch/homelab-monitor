@@ -5,9 +5,11 @@ import { UiTitle } from '../../ui/title/title';
 import { UiText } from '../../ui/text/text';
 import { badgeForStatus, UiBadge } from '../../ui/badge/badge';
 import { MachineCard } from '../machine-card/machine-card';
+import { UiBox } from '../../ui/box/box';
+import { UiContainer } from '../../ui/container/container';
 
 @Component({
-  imports: [UiStack, UiTitle, UiText, MachineCard],
+  imports: [UiStack, UiTitle, UiText, MachineCard, UiBox, UiContainer],
   selector: 'app-machines-overview',
   templateUrl: './machines-overview.html',
 })

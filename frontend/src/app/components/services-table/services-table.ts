@@ -5,12 +5,13 @@ import { UiText } from '../../ui/text/text';
 import { badgeForStatus, UiBadge } from '../../ui/badge/badge';
 import { DashboardService, MachineWithServices } from '../../domain/dashboard';
 import { Status } from '../../domain/status';
+import { UiBox } from '../../ui/box/box';
 
 type ServiceStatusFilter = Status | 'all';
 type MachineFilter = string | 'all';
 
 @Component({
-  imports: [UiStack, UiTitle, UiText, UiBadge],
+  imports: [UiStack, UiTitle, UiText, UiBadge, UiBox],
   selector: 'app-services-table',
   templateUrl: './services-table.html',
 })

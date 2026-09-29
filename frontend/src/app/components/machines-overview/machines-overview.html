@@ -1,9 +1,6 @@
-<section class="rounded-xl border bg-card p-4 shadow-sm">
+<ui-box preset="card">
     <ui-stack>
-        <div class="flex flex-col gap-1">
         <ui-title order="2">Machines</ui-title>
-        <ui-text size="sm" variant="muted">Compact overview grouped by machine.</ui-text>
-        </div>
 
         <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
         @for (machine of machines(); track machine.id) {
@@ -11,4 +8,4 @@
         }
         </div>
     </ui-stack>
-</section>
+</ui-box>
