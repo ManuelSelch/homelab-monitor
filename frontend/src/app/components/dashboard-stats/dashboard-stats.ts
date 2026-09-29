@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { UiText } from '../../ui/text/text';
+import { UiText } from '../../ui/typography/text/text';
 import { DashboardService, MachineWithServices } from '../../domain/dashboard';
 import { Status } from '../../domain/status';
 

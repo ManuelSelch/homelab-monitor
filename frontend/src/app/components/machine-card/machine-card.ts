@@ -1,8 +1,8 @@
 import { Component, computed, input, output } from '@angular/core';
 import { badgeForStatus, UiBadge } from '../../ui/badge/badge';
-import { TextVariant, UiText } from '../../ui/text/text';
+import { TextVariant, UiText } from '../../ui/typography/text/text';
 import { MachineWithServices } from '../../domain/dashboard';
-import { UiTitle } from '../../ui/title/title';
+import { UiTitle } from '../../ui/typography/title/title';
 import { UiButton } from '../../ui/actions/button/button';
 import { UiHStack } from '../../ui/layout/hstack/hstack';
 import { UiStack } from '../../ui/layout/stack/stack';

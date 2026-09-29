@@ -1,6 +1,6 @@
 import { Component, DestroyRef, effect, inject, input, output, signal } from '@angular/core';
-import { UiTitle } from '../../ui/title/title';
-import { UiText } from '../../ui/text/text';
+import { UiTitle } from '../../ui/typography/title/title';
+import { UiText } from '../../ui/typography/text/text';
 import { badgeForStatus, UiBadge } from '../../ui/badge/badge';
 import { DashboardService } from '../../domain/dashboard';
 import { HomelabApi } from '../../api/homelab-api';

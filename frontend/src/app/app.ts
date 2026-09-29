@@ -7,7 +7,7 @@ import { DashboardService, MachineWithServices } from './domain/dashboard';
 import { MonitoredService } from './domain/monitored-service';
 import { badgeForStatus } from './ui/badge/badge';
 import { UiStack } from './ui/layout/stack/stack';
-import { UiText } from './ui/text/text';
+import { UiText } from './ui/typography/text/text';
 import { DashboardStats } from './components/dashboard-stats/dashboard-stats';
 import { MachinesOverview } from './components/machines-overview/machines-overview';
 import { ServicesTable } from './components/services-table/services-table';

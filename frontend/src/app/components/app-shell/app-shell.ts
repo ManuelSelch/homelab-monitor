@@ -3,8 +3,8 @@ import { UiBox } from '../../ui/layout/box/box';
 import { UiContainer } from '../../ui/layout/container/container';
 import { UiHStack } from '../../ui/layout/hstack/hstack';
 import { UiStack } from '../../ui/layout/stack/stack';
-import { UiText } from '../../ui/text/text';
-import { UiTitle } from '../../ui/title/title';
+import { UiText } from '../../ui/typography/text/text';
+import { UiTitle } from '../../ui/typography/title/title';
 
 @Component({
   imports: [UiBox, UiContainer, UiHStack, UiStack, UiText, UiTitle],
