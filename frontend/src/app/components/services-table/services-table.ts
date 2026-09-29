@@ -7,13 +7,14 @@ import { DashboardService, MachineWithServices } from '../../domain/dashboard';
 import { Status } from '../../domain/status';
 import { UiBox } from '../../ui/layout/box/box';
 import { UiGrid } from '../../ui/layout/grid/grid';
-import { Select } from '../../ui/select/select';
+import { Select } from '../../ui/forms/select/select';
+import { Input } from '../../ui/forms/input/input';
 
 type ServiceStatusFilter = Status | 'all';
 type MachineFilter = string | 'all';
 
 @Component({
-  imports: [UiStack, UiTitle, UiText, UiBadge, UiBox, UiGrid, Select],
+  imports: [UiStack, UiTitle, UiText, UiBadge, UiBox, UiGrid, Select, Input],
   selector: 'app-services-table',
   templateUrl: './services-table.html',
 })

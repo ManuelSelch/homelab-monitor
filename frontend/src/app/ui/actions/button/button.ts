@@ -6,7 +6,7 @@ import {
   type UiRadius,
   type UiVariant,
   type UiWidth,
-} from '../shared/box-classes';
+} from '../../shared/box-classes';
 
 type ButtonAlign = 'center' | 'left';
 type ButtonHover = 'none' | 'muted' | 'primary';
