@@ -1,4 +1,4 @@
-package de.selch.homelabmonitor.backend.proxmox;
+package de.selch.homelabmonitor.backend.proxmox.domain;
 
 public record ProxmoxResource(
     String id,

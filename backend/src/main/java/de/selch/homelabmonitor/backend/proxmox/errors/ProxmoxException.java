@@ -1,4 +1,4 @@
-package de.selch.homelabmonitor.backend.proxmox;
+package de.selch.homelabmonitor.backend.proxmox.errors;
 
 public class ProxmoxException extends RuntimeException {
     public ProxmoxException(String message) {

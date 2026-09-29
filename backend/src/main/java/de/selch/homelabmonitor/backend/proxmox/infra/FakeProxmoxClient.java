@@ -1,5 +1,6 @@
-package de.selch.homelabmonitor.backend.proxmox;
+package de.selch.homelabmonitor.backend.proxmox.infra;
 
+import de.selch.homelabmonitor.backend.proxmox.domain.ProxmoxResource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 

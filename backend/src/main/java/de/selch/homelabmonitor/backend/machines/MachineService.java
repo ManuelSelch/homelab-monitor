@@ -1,7 +1,7 @@
 package de.selch.homelabmonitor.backend.machines;
 
-import de.selch.homelabmonitor.backend.proxmox.ProxmoxGateway;
-import de.selch.homelabmonitor.backend.proxmox.ProxmoxResource;
+import de.selch.homelabmonitor.backend.proxmox.infra.ProxmoxGateway;
+import de.selch.homelabmonitor.backend.proxmox.domain.ProxmoxResource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,4 +1,6 @@
-package de.selch.homelabmonitor.backend.proxmox;
+package de.selch.homelabmonitor.backend.proxmox.infra;
+
+import de.selch.homelabmonitor.backend.proxmox.domain.ProxmoxResource;
 
 import java.util.List;
 

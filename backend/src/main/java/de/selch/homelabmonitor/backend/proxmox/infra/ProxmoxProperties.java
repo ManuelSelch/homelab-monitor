@@ -1,4 +1,4 @@
-package de.selch.homelabmonitor.backend.proxmox;
+package de.selch.homelabmonitor.backend.proxmox.infra;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

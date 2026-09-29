@@ -1,7 +1,9 @@
-package de.selch.homelabmonitor.backend.proxmox;
+package de.selch.homelabmonitor.backend.proxmox.infra;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.selch.homelabmonitor.backend.proxmox.errors.ProxmoxException;
+import de.selch.homelabmonitor.backend.proxmox.domain.ProxmoxResource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Profile("!fake")
+@Profile("prod")
 public class ProxmoxClient implements ProxmoxGateway {
     private final ProxmoxProperties properties;
     private final ObjectMapper objectMapper;
