@@ -6,7 +6,8 @@ type HStackJustify = 'start' | 'center' | 'between' | 'end';
 
 @Component({
   selector: 'ui-hstack',
-  template: `<div [class]="classes()"><ng-content /></div>`,
+  template: `<ng-content />`,
+  host: { '[class]': 'classes()' }
 })
 export class UiHStack {
   size = input<HStackSize>('md');

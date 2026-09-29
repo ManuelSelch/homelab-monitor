@@ -4,7 +4,8 @@ type ContainerSize = 'sm' | 'md' | 'lg' | 'xl';
 
 @Component({
   selector: 'ui-container',
-  template: `<div [class]="classes()"><ng-content /></div>`,
+  template: `<ng-content />`,
+  host: { '[class]': 'classes()' }
 })
 export class UiContainer {
   size = input<ContainerSize>('lg');

@@ -1,4 +1,5 @@
 import { booleanAttribute, Component, computed, input } from '@angular/core';
+import { classes } from '@spartan-ng/helm/utils';
 
 type GridPreset = 'default';
 type GridGap = 'none' | 'xs' | 'sm' | 'md' | 'lg';
@@ -6,7 +7,8 @@ type GridColumns = '1' | '2' | '3' | '4';
 
 @Component({
   selector: 'ui-grid',
-  template: `<div [class]="classes()"><ng-content /></div>`,
+  template: `<ng-content />`,
+  host: { '[class]': 'classes()' }
 })
 export class UiGrid {
   preset = input<GridPreset>('default');

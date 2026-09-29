@@ -11,7 +11,8 @@ import {
 
 @Component({
   selector: 'ui-box',
-  template: `<div [class]="classes()"><ng-content /></div>`,
+  template: `<ng-content />`,
+  host: { '[class]': 'classes()' }
 })
 export class UiBox {
   preset = input<UiPreset>('plain');

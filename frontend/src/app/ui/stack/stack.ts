@@ -4,7 +4,8 @@ type StackSize = 'xs' | 'sm' | 'md' | 'lg';
 
 @Component({
   selector: 'ui-stack',
-  template: `<div [class]="classes()"><ng-content /></div>`,
+  template: `<ng-content />`,
+  host: { '[class]': 'classes()' }
 })
 export class UiStack {
   size = input<StackSize>('md');

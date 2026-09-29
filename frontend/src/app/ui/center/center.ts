@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'ui-center',
-  template: `<div class="flex items-center justify-center"><ng-content /></div>`,
+  template: `<ng-content />`,
+  host: { 'class': 'flex items-center justify-center' }
 })
 export class UiCenter {}
