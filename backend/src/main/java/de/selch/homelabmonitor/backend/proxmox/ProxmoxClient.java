@@ -2,6 +2,7 @@ package de.selch.homelabmonitor.backend.proxmox;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import javax.net.ssl.SSLContext;
@@ -22,7 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ProxmoxClient {
+@Profile("!fake")
+public class ProxmoxClient implements ProxmoxGateway {
     private final ProxmoxProperties properties;
     private final ObjectMapper objectMapper;
     private final HttpClient httpClient;
