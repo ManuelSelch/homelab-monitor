@@ -6,7 +6,7 @@ import { AppShell } from './components/app-shell/app-shell';
 import { DashboardService, MachineWithServices } from './domain/dashboard';
 import { MonitoredService } from './domain/monitored-service';
 import { badgeForStatus } from './ui/badge/badge';
-import { UiStack } from './ui/stack/stack';
+import { UiStack } from './ui/layout/stack/stack';
 import { UiText } from './ui/text/text';
 import { DashboardStats } from './components/dashboard-stats/dashboard-stats';
 import { MachinesOverview } from './components/machines-overview/machines-overview';

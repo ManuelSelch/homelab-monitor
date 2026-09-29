@@ -1,6 +1,6 @@
 import { Component, input, output } from '@angular/core';
 import { MachineWithServices } from '../../domain/dashboard';
-import { UiStack } from '../../ui/stack/stack';
+import { UiStack } from '../../ui/layout/stack/stack';
 import { UiTitle } from '../../ui/title/title';
 import { badgeForStatus } from '../../ui/badge/badge';
 import { MachineCard } from '../machine-card/machine-card';

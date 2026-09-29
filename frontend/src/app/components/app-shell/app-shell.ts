@@ -1,8 +1,8 @@
 import { Component, input } from '@angular/core';
 import { UiBox } from '../../ui/box/box';
-import { UiContainer } from '../../ui/container/container';
-import { UiHStack } from '../../ui/hstack/hstack';
-import { UiStack } from '../../ui/stack/stack';
+import { UiContainer } from '../../ui/layout/container/container';
+import { UiHStack } from '../../ui/layout/hstack/hstack';
+import { UiStack } from '../../ui/layout/stack/stack';
 import { UiText } from '../../ui/text/text';
 import { UiTitle } from '../../ui/title/title';
 

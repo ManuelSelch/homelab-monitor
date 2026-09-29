@@ -1,5 +1,5 @@
 import { Component, computed, input, output, signal } from '@angular/core';
-import { UiStack } from '../../ui/stack/stack';
+import { UiStack } from '../../ui/layout/stack/stack';
 import { UiTitle } from '../../ui/title/title';
 import { UiText } from '../../ui/text/text';
 import { badgeForStatus, UiBadge } from '../../ui/badge/badge';

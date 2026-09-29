@@ -4,8 +4,8 @@ import { TextVariant, UiText } from '../../ui/text/text';
 import { MachineWithServices } from '../../domain/dashboard';
 import { UiTitle } from '../../ui/title/title';
 import { UiButton } from '../../ui/button/button';
-import { UiHStack } from '../../ui/hstack/hstack';
-import { UiStack } from '../../ui/stack/stack';
+import { UiHStack } from '../../ui/layout/hstack/hstack';
+import { UiStack } from '../../ui/layout/stack/stack';
 
 @Component({
   imports: [UiBadge, UiText, UiTitle, UiHStack, UiStack, UiButton],
