@@ -1,7 +1,7 @@
 package de.selch.homelabmonitor.backend.services;
 
-import de.selch.homelabmonitor.backend.logs.LogEntry;
-import de.selch.homelabmonitor.backend.logs.ServiceLogService;
+import de.selch.homelabmonitor.backend.logs.domain.LogEntry;
+import de.selch.homelabmonitor.backend.logs.LogService;
 import de.selch.homelabmonitor.backend.services.infra.ServiceRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,11 +13,11 @@ import java.util.List;
 @RestController
 public class ServicesController {
     private final ServiceRepository serviceRepository;
-    private final ServiceLogService serviceLogService;
+    private final LogService logService;
 
-    public ServicesController(ServiceRepository serviceRepository, ServiceLogService serviceLogService) {
+    public ServicesController(ServiceRepository serviceRepository, LogService logService) {
         this.serviceRepository = serviceRepository;
-        this.serviceLogService = serviceLogService;
+        this.logService = logService;
     }
 
     @GetMapping("/api/services")
@@ -27,6 +27,6 @@ public class ServicesController {
 
     @GetMapping("/api/services/{id}/logs")
     public List<LogEntry> logs(@PathVariable String id, @RequestParam(defaultValue = "200") int limit) {
-        return serviceLogService.logs(id, limit);
+        return logService.logs(id, limit);
     }
 }

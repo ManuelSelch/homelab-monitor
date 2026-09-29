@@ -1,4 +1,4 @@
-package de.selch.homelabmonitor.backend.logs;
+package de.selch.homelabmonitor.backend.logs.domain;
 
 import java.time.Instant;
 

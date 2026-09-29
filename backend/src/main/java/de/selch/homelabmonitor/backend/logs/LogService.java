@@ -1,5 +1,6 @@
 package de.selch.homelabmonitor.backend.logs;
 
+import de.selch.homelabmonitor.backend.logs.domain.LogEntry;
 import de.selch.homelabmonitor.backend.logs.errors.LogLimitExceededException;
 import de.selch.homelabmonitor.backend.logs.errors.UnsupportedLogSourceException;
 import de.selch.homelabmonitor.backend.logs.infra.LokiClient;
@@ -9,11 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ServiceLogService {
+public class LogService {
     private final ServiceRepository serviceRepository;
     private final LokiClient lokiClient;
 
-    public ServiceLogService(ServiceRepository serviceRepository, LokiClient lokiClient) {
+    public LogService(ServiceRepository serviceRepository, LokiClient lokiClient) {
         this.serviceRepository = serviceRepository;
         this.lokiClient = lokiClient;
     }

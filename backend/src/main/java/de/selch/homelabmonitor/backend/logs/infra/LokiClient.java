@@ -2,7 +2,7 @@ package de.selch.homelabmonitor.backend.logs.infra;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.selch.homelabmonitor.backend.logs.LogEntry;
+import de.selch.homelabmonitor.backend.logs.domain.LogEntry;
 import de.selch.homelabmonitor.backend.logs.errors.LogFetchException;
 import org.springframework.stereotype.Component;
 
