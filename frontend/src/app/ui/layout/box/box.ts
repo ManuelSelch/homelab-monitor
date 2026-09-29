@@ -7,7 +7,7 @@ import {
   type UiRadius,
   type UiVariant,
   type UiWidth,
-} from '../shared/box-classes';
+} from '../../shared/box-classes';
 
 @Component({
   selector: 'ui-box',

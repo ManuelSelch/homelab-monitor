@@ -4,8 +4,7 @@ import { UiStack } from '../../ui/layout/stack/stack';
 import { UiTitle } from '../../ui/title/title';
 import { badgeForStatus } from '../../ui/badge/badge';
 import { MachineCard } from '../machine-card/machine-card';
-import { UiBox } from '../../ui/box/box';
-
+import { UiBox } from '../../ui/layout/box/box';
 @Component({
   imports: [UiStack, UiTitle, MachineCard, UiBox],
   selector: 'app-machines-overview',

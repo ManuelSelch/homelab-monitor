@@ -5,16 +5,15 @@ import { UiText } from '../../ui/text/text';
 import { badgeForStatus, UiBadge } from '../../ui/badge/badge';
 import { DashboardService, MachineWithServices } from '../../domain/dashboard';
 import { Status } from '../../domain/status';
-import { UiBox } from '../../ui/box/box';
+import { UiBox } from '../../ui/layout/box/box';
 import { UiGrid } from '../../ui/grid/grid';
-import { UiSelect } from '../../ui/input/input';
 import { Select } from '../../ui/select/select';
 
 type ServiceStatusFilter = Status | 'all';
 type MachineFilter = string | 'all';
 
 @Component({
-  imports: [UiStack, UiTitle, UiText, UiBadge, UiBox, UiGrid, UiSelect, Select],
+  imports: [UiStack, UiTitle, UiText, UiBadge, UiBox, UiGrid, Select],
   selector: 'app-services-table',
   templateUrl: './services-table.html',
 })

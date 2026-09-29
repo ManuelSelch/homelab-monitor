@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { UiBox } from '../../ui/box/box';
+import { UiBox } from '../../ui/layout/box/box';
 import { UiContainer } from '../../ui/layout/container/container';
 import { UiHStack } from '../../ui/layout/hstack/hstack';
 import { UiStack } from '../../ui/layout/stack/stack';
