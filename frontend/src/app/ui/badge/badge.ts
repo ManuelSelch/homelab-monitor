@@ -1,5 +1,5 @@
 import { Component, computed, input } from '@angular/core';
-import { Status } from '../../domain/machine';
+import { Status } from '../../domain/status';
 
 export type BadgeVariant = 'default' | 'success' | 'warning' | 'danger' | 'muted';
 

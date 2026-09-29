@@ -4,7 +4,7 @@ import { UiTitle } from '../../ui/title/title';
 import { UiText } from '../../ui/text/text';
 import { badgeForStatus, UiBadge } from '../../ui/badge/badge';
 import { DashboardService, MachineWithServices } from '../../domain/dashboard';
-import { Status } from '../../domain/machine';
+import { Status } from '../../domain/status';
 
 type ServiceStatusFilter = Status | 'all';
 type MachineFilter = string | 'all';

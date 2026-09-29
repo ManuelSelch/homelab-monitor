@@ -2,8 +2,6 @@ import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { HomelabApi } from './api/homelab-api';
-import { MachineDto } from './api/machine.dto';
-import { ServiceDto } from './api/service.dto';
 import { AppShell } from './components/app-shell/app-shell';
 import { DashboardService, MachineWithServices } from './domain/dashboard';
 import { MonitoredService } from './domain/monitored-service';
@@ -14,7 +12,7 @@ import { DashboardStats } from './components/dashboard-stats/dashboard-stats';
 import { MachinesOverview } from './components/machines-overview/machines-overview';
 import { ServicesTable } from './components/services-table/services-table';
 import { LogsDrawer } from './components/logs-drawer/logs-drawer';
-import { Status } from './domain/status';
+import { Machine } from './domain/machine';
 
 type MachineFilter = string | 'all';
 
@@ -107,9 +105,9 @@ export class App {
   //#endregion
 }
 
-function toDashboardViewModel(machines: MachineDto[], services: ServiceDto[]) {
+function toDashboardViewModel(machines: Machine[], services: MonitoredService[]) {
   const machineById = new Map(machines.map((machine) => [machine.id, machine]));
-  const servicesByMachineId = new Map<string, ServiceDto[]>();
+  const servicesByMachineId = new Map<string, MonitoredService[]>();
 
   for (const service of services) {
     if (!service.machineId || !machineById.has(service.machineId)) {
@@ -120,19 +118,16 @@ function toDashboardViewModel(machines: MachineDto[], services: ServiceDto[]) {
   }
 
   const machinesWithServices = machines.map((machine) => {
-    const services = (servicesByMachineId.get(machine.id) ?? []).map(toServiceViewModel);
+    const services = (servicesByMachineId.get(machine.id) ?? []);
 
     return {
-      id: machine.id,
-      name: machine.name,
-      status: machine.status ? toStatus(machine.status) : toMachineStatusFromServices(services),
+      ...machine,
       services: services,
-    };
+    } as MachineWithServices;
   });
 
   const unassignedServices = services
-    .filter((service) => !service.machineId || !machineById.has(service.machineId))
-    .map(toServiceViewModel);
+    .filter((service) => !service.machineId || !machineById.has(service.machineId));
 
   return {
     machines: machinesWithServices,
@@ -141,48 +136,10 @@ function toDashboardViewModel(machines: MachineDto[], services: ServiceDto[]) {
       const machine = service.machineId ? machineById.get(service.machineId) : undefined;
 
       return {
-        ...toServiceViewModel(service),
+        ...service,
         machineId: machine?.id,
         machineName: machine?.name ?? 'Unassigned',
       };
     }),
   };
-}
-
-function toServiceViewModel(service: ServiceDto): MonitoredService {
-  return {
-    id: service.id,
-    name: service.name,
-    type: service.type ?? 'Service',
-    status: toStatus(service.status),
-    url: service.url,
-  };
-}
-
-function toMachineStatusFromServices(services: MonitoredService[]): Status {
-  if (services.some((service) => service.status === 'warning')) {
-    return 'warning';
-  }
-
-  if (services.length > 0 && services.every((service) => service.status === 'offline')) {
-    return 'offline';
-  }
-
-  return 'online';
-}
-
-function toStatus(status: string | undefined): Status {
-  switch (status?.toLowerCase()) {
-    case 'up':
-    case 'online':
-    case 'healthy':
-      return 'online';
-    case 'warning':
-    case 'degraded':
-      return 'warning';
-    case 'down':
-    case 'offline':
-    default:
-      return 'offline';
-  }
 }
