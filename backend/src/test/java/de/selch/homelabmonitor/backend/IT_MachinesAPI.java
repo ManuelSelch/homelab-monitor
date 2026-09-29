@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
-@ActiveProfiles("fake")
+@ActiveProfiles(ProfileNames.FAKE)
 @AutoConfigureMockMvc
 public class IT_MachinesAPI {
     @Autowired

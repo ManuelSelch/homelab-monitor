@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest(properties = "services.file=src/test/resources/services-with-logs.yaml")
-@ActiveProfiles("fake")
+@ActiveProfiles(ProfileNames.FAKE)
 @AutoConfigureMockMvc
 public class IT_ServiceLogsAPI {
     private static final HttpServer loki = startLoki();

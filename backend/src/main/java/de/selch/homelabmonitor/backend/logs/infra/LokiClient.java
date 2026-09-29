@@ -2,8 +2,10 @@ package de.selch.homelabmonitor.backend.logs.infra;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.selch.homelabmonitor.backend.ProfileNames;
 import de.selch.homelabmonitor.backend.logs.domain.LogEntry;
 import de.selch.homelabmonitor.backend.logs.errors.LogFetchException;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -19,7 +21,8 @@ import java.util.Comparator;
 import java.util.List;
 
 @Component
-public class LokiClient {
+@Profile(ProfileNames.PROD)
+public class LokiClient implements LokiGateway {
     private final LokiProperties properties;
     private final ObjectMapper objectMapper;
     private final HttpClient httpClient = HttpClient.newHttpClient();

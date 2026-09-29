@@ -12,7 +12,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest(properties = "services.file=src/test/resources/services.yaml")
-@ActiveProfiles("fake")
+@ActiveProfiles(ProfileNames.FAKE)
 @AutoConfigureMockMvc
 public class IT_ServicesAPI {
 

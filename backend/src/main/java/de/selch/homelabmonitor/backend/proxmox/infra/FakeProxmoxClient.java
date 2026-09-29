@@ -1,5 +1,6 @@
 package de.selch.homelabmonitor.backend.proxmox.infra;
 
+import de.selch.homelabmonitor.backend.ProfileNames;
 import de.selch.homelabmonitor.backend.proxmox.domain.ProxmoxResource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-@Profile("fake")
+@Profile(ProfileNames.FAKE)
 public class FakeProxmoxClient implements ProxmoxGateway {
     private List<ProxmoxResource> vms;
     private List<ProxmoxResource> containers;

@@ -5,7 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
-@ActiveProfiles("fake")
+@ActiveProfiles(ProfileNames.FAKE)
 class BackendApplicationTests {
 
     @Test
