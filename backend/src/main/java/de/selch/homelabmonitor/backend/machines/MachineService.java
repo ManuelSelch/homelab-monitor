@@ -16,7 +16,7 @@ public class MachineService {
     }
 
     public List<Machine> machines() {
-        return Stream.concat(proxmox.fetchQemuVms().stream(), proxmox.fetchLxcContainers().stream())
+        return Stream.concat(proxmox.fetchVms().stream(), proxmox.fetchContainers().stream())
             .map(MachineService::toMachine)
             .toList();
     }

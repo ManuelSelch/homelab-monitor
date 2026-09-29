@@ -37,11 +37,11 @@ public class ProxmoxClient implements ProxmoxGateway {
         this.httpClient = createHttpClient(properties.insecureSsl());
     }
 
-    public List<ProxmoxResource> fetchQemuVms() {
+    public List<ProxmoxResource> fetchVms() {
         return fetchResources("/nodes/" + properties.node() + "/qemu", "vm");
     }
 
-    public List<ProxmoxResource> fetchLxcContainers() {
+    public List<ProxmoxResource> fetchContainers() {
         return fetchResources("/nodes/" + properties.node() + "/lxc", "container");
     }
 

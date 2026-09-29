@@ -9,16 +9,38 @@ import java.util.List;
 @Component
 @Profile("fake")
 public class FakeProxmoxClient implements ProxmoxGateway {
-    public List<ProxmoxResource> fetchQemuVms() {
-        return List.of(
+    private List<ProxmoxResource> vms;
+    private List<ProxmoxResource> containers;
+
+    public FakeProxmoxClient() {
+        // setup fake data
+        vms = List.of(
                 new ProxmoxResource("300", "Windows 10", "stopped", "vm", 0, 0)
         );
-    }
-
-    public List<ProxmoxResource> fetchLxcContainers() {
-        return List.of(
+        containers = List.of(
                 new ProxmoxResource("100", "Container 100", "running", "container", 0.04, 32.1),
                 new ProxmoxResource("200", "Container 200", "running", "container", 99.9, 88.8)
         );
+    }
+
+    public List<ProxmoxResource> fetchVms() {
+        return vms;
+    }
+
+    public List<ProxmoxResource> fetchContainers() {
+        return containers;
+    }
+
+    public void reset() {
+        vms = List.of();
+        containers = List.of();
+    }
+
+    public void givenVms(List<ProxmoxResource> vms) {
+        this.vms = vms;
+    }
+
+    public void givenContainers(List<ProxmoxResource> containers) {
+        this.containers = containers;
     }
 }
