@@ -9,26 +9,18 @@
             <ui-grid columns="3" responsive="false">
                 <input uiInput placeholder="Search services…" [value]="searchTerm()" (input)="setSearchTerm($event)"/>
 
-                <select
-                class="h-10 rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
-                [value]="selectedMachine()"
-                (change)="selectMachine($event)"
-                >
-                <option value="all">All machines</option>
-                @for (machine of machines(); track machine.id) {
-                    <option [value]="machine.id">{{ machine.name }}</option>
-                }
+                <select uiSelect [value]="selectedMachine()" (change)="selectMachine($event)">
+                    <option value="all">All machines</option>
+                    @for (machine of machines(); track machine.id) {
+                        <option [value]="machine.id">{{ machine.name }}</option>
+                    }
                 </select>
 
-                <select
-                class="h-10 rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
-                [value]="statusFilter()"
-                (change)="setStatusFilter($event)"
-                >
-                <option value="all">All statuses</option>
-                <option value="Online">Online</option>
-                <option value="Warning">Warning</option>
-                <option value="Offline">Offline</option>
+                <select uiSelect [value]="statusFilter()" (change)="setStatusFilter($event)">
+                    <option value="all">All statuses</option>
+                    <option value="Online">Online</option>
+                    <option value="Warning">Warning</option>
+                    <option value="Offline">Offline</option>
                 </select>
             </ui-grid>
         </ui-stack>
