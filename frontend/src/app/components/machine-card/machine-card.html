@@ -10,7 +10,7 @@
 
         <ui-stack size="sm">
             <ui-badge [variant]="badgeForStatus(machine().status)">{{ machine().status }}</ui-badge>
-            <ui-text variant="muted" size="sm">cpu: {{machine().cpuUsage}}%</ui-text>
+            <ui-text [variant]="cpuTextVariant()" size="sm">cpu: {{machine().cpuUsage}}%</ui-text>
         </ui-stack>
     </ui-hstack>
 </button>

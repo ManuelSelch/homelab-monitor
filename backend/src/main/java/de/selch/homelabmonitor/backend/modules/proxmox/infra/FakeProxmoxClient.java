@@ -19,7 +19,7 @@ public class FakeProxmoxClient implements ProxmoxGateway {
                 new ProxmoxResource("300", "Windows 10", "stopped", "vm", 0, 0)
         );
         containers = List.of(
-                new ProxmoxResource("100", "Container 100", "running", "container", 0.04, 32.1),
+                new ProxmoxResource("100", "Container 100", "running", "container", 34.5, 32.1),
                 new ProxmoxResource("200", "Container 200", "running", "container", 99.9, 88.8)
         );
     }

@@ -1,7 +1,7 @@
 import { Component, computed, input } from '@angular/core';
 
-type TextSize = 'xs' | 'sm' | 'md' | 'lg';
-type TextVariant = 'default' | 'muted';
+export type TextSize = 'xs' | 'sm' | 'md' | 'lg';
+export type TextVariant = 'default' | 'muted' | 'danger' | 'warning' | 'success';
 
 @Component({
   selector: 'ui-text',
@@ -22,6 +22,9 @@ export class UiText {
     const variants: Record<TextVariant, string> = {
       default: 'text-foreground',
       muted: 'text-muted-foreground',
+      danger: 'text-red-600',
+      warning: 'text-yellow-600',
+      success: 'text-green-600',
     };
 
     return `${sizes[this.size()]} ${variants[this.variant()]}`;

@@ -1,6 +1,6 @@
-import { Component, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { badgeForStatus, UiBadge } from '../../ui/badge/badge';
-import { UiText } from '../../ui/text/text';
+import { TextVariant, UiText } from '../../ui/text/text';
 import { MachineWithServices } from '../../domain/dashboard';
 import { UiTitle } from '../../ui/title/title';
 import { UiButton } from '../../ui/button/button';
@@ -17,6 +17,14 @@ export class MachineCard {
   isSelected = input.required<boolean>()
 
   machineClicked = output();
+
+  protected cpuTextVariant = computed<TextVariant>(() => {
+    var cpu = this.machine().cpuUsage;
+
+    if(cpu >= 80) return 'danger'
+    if(cpu >= 30) return 'warning'
+    return 'muted'
+  })
 
   clickMachine() {
     this.machineClicked.emit();
