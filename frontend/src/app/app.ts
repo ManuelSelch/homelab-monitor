@@ -6,7 +6,6 @@ import { MachineDto } from './api/machine.dto';
 import { ServiceDto } from './api/service.dto';
 import { AppShell } from './components/app-shell/app-shell';
 import { DashboardService, MachineWithServices } from './domain/dashboard';
-import { MachineStatus } from './domain/machine';
 import { MonitoredService } from './domain/monitored-service';
 import { badgeForStatus } from './ui/badge/badge';
 import { UiStack } from './ui/stack/stack';
@@ -15,6 +14,7 @@ import { DashboardStats } from './components/dashboard-stats/dashboard-stats';
 import { MachinesOverview } from './components/machines-overview/machines-overview';
 import { ServicesTable } from './components/services-table/services-table';
 import { LogsDrawer } from './components/logs-drawer/logs-drawer';
+import { Status } from './domain/status';
 
 type MachineFilter = string | 'all';
 
@@ -159,30 +159,30 @@ function toServiceViewModel(service: ServiceDto): MonitoredService {
   };
 }
 
-function toMachineStatusFromServices(services: MonitoredService[]): MachineStatus {
-  if (services.some((service) => service.status === 'Warning')) {
-    return 'Warning';
+function toMachineStatusFromServices(services: MonitoredService[]): Status {
+  if (services.some((service) => service.status === 'warning')) {
+    return 'warning';
   }
 
-  if (services.length > 0 && services.every((service) => service.status === 'Offline')) {
-    return 'Offline';
+  if (services.length > 0 && services.every((service) => service.status === 'offline')) {
+    return 'offline';
   }
 
-  return 'Online';
+  return 'online';
 }
 
-function toStatus(status: string | undefined): MachineStatus {
+function toStatus(status: string | undefined): Status {
   switch (status?.toLowerCase()) {
     case 'up':
     case 'online':
     case 'healthy':
-      return 'Online';
+      return 'online';
     case 'warning':
     case 'degraded':
-      return 'Warning';
+      return 'warning';
     case 'down':
     case 'offline':
     default:
-      return 'Offline';
+      return 'offline';
   }
 }

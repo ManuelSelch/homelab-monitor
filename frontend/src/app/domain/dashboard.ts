@@ -1,6 +1,12 @@
 import { Machine } from './machine';
 import { MonitoredService } from './monitored-service';
 
+export type DashboardDataDto = {
+  machines: Machine[];
+  services: MonitoredService[];
+};
+
+
 export type MachineWithServices = Machine & {
   services: MonitoredService[];
 };

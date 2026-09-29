@@ -1,15 +1,15 @@
 import { Component, computed, input } from '@angular/core';
-import { MachineStatus } from '../../domain/machine';
+import { Status } from '../../domain/machine';
 
 export type BadgeVariant = 'default' | 'success' | 'warning' | 'danger' | 'muted';
 
-export function badgeForStatus(status: MachineStatus): BadgeVariant {
+export function badgeForStatus(status: Status): BadgeVariant {
   switch (status) {
-    case 'Online':
+    case 'online':
       return 'success';
-    case 'Warning':
+    case 'warning':
       return 'warning';
-    case 'Offline':
+    case 'offline':
       return 'danger';
   }
 }

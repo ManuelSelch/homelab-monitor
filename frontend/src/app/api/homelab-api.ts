@@ -1,24 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
-import { MachineDto } from './machine.dto';
-import { ServiceDto } from './service.dto';
-
-export type DashboardDataDto = {
-  machines: MachineDto[];
-  services: ServiceDto[];
-};
+import { Machine } from '../domain/machine';
+import { MonitoredService } from '../domain/monitored-service';
+import { DashboardDataDto } from '../domain/dashboard';
 
 @Injectable({ providedIn: 'root' })
 export class HomelabApi {
   private readonly http = inject(HttpClient);
 
-  getMachines(): Observable<MachineDto[]> {
-    return this.http.get<MachineDto[]>('/api/machines');
+  getMachines(): Observable<Machine[]> {
+    return this.http.get<Machine[]>('/api/machines');
   }
 
-  getServices(): Observable<ServiceDto[]> {
-    return this.http.get<ServiceDto[]>('/api/services');
+  getServices(): Observable<MonitoredService[]> {
+    return this.http.get<MonitoredService[]>('/api/services');
   }
 
   getDashboardData(): Observable<DashboardDataDto> {

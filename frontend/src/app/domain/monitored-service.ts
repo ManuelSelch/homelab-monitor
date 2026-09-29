@@ -1,12 +1,10 @@
-import { MachineStatus } from './machine';
-
-export type MonitoredServiceStatus = MachineStatus;
+import { Status } from "./status";
 
 export type MonitoredService = {
   id: string;
   name: string;
   type: string;
-  status: MonitoredServiceStatus;
+  status: Status;
   url?: string;
   machineId?: string;
 };

@@ -1,7 +1,9 @@
-export type MachineStatus = 'Online' | 'Offline' | 'Warning';
+import { Status } from "./status";
 
 export type Machine = {
   id: string;
   name: string;
-  status: MachineStatus;
+  status: Status;
+  cpuUsage: number;
+  memoryUsage: number;
 };

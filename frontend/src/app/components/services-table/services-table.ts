@@ -4,9 +4,9 @@ import { UiTitle } from '../../ui/title/title';
 import { UiText } from '../../ui/text/text';
 import { badgeForStatus, UiBadge } from '../../ui/badge/badge';
 import { DashboardService, MachineWithServices } from '../../domain/dashboard';
-import { MachineStatus } from '../../domain/machine';
+import { Status } from '../../domain/machine';
 
-type ServiceStatusFilter = MachineStatus | 'all';
+type ServiceStatusFilter = Status | 'all';
 type MachineFilter = string | 'all';
 
 @Component({

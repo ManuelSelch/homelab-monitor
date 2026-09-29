@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { UiText } from '../../ui/text/text';
 import { DashboardService, MachineWithServices } from '../../domain/dashboard';
-import { MachineStatus } from '../../domain/machine';
+import { Status } from '../../domain/status';
 
 @Component({
   imports: [UiText],
@@ -12,7 +12,7 @@ export class DashboardStats {
   machines = input.required<MachineWithServices[]>();
   allServices = input.required<DashboardService[]>();
 
-  serviceCountByStatus(status: MachineStatus): number {
+  serviceCountByStatus(status: Status): number {
     return this.allServices().filter((service) => service.status === status).length;
   }
 }
