@@ -1,4 +1,4 @@
-package de.selch.homelabmonitor.backend.modules.services;
+package de.selch.homelabmonitor.backend.modules.services.domain;
 
 import de.selch.homelabmonitor.backend.domain.Status;
 

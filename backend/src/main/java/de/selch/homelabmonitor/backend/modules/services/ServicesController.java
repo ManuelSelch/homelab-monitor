@@ -2,6 +2,7 @@ package de.selch.homelabmonitor.backend.modules.services;
 
 import de.selch.homelabmonitor.backend.modules.logs.domain.LogEntry;
 import de.selch.homelabmonitor.backend.modules.logs.LogService;
+import de.selch.homelabmonitor.backend.modules.services.domain.MonitoredService;
 import de.selch.homelabmonitor.backend.modules.services.infra.ServiceRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
