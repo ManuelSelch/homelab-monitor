@@ -7,7 +7,7 @@
 
         <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
         @for (machine of machines(); track machine.id) {
-            <app-machine-card [machine]="machine" (machineClicked)="selectMachine(machine.id)"/>
+            <app-machine-card [machine]="machine" (machineClicked)="selectMachine(machine.id)" [isSelected]="machine.id === currentMachine()"/>
         }
         </div>
     </ui-stack>

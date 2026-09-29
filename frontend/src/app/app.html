@@ -6,11 +6,11 @@
       <ui-text variant="muted">{{ error() }}</ui-text>
     } @else if (hasDashboardItems()) {
       <app-dashboard-stats [machines]="machines()" [allServices]="allServices()"/>
-      <app-machines-overview [machines]="machines()" (machineSelected)="setMachineFilter($event)"/>
+      <app-machines-overview [machines]="machines()" [currentMachine]="machineFilter()" (machineSelected)="machineSelected($event)"/>
       <app-services-table 
         [machines]="machines()" [allServices]="allServices()"
         [selectedMachine]="machineFilter()"
-        (machineSelected)="setMachineFilter($event)"
+        (machineSelected)="machineSelected($event)"
         (logsRequested)="openLogs($event)"
       />
     } @else {

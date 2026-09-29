@@ -14,6 +14,7 @@ import { UiStack } from '../../ui/stack/stack';
 })
 export class MachineCard {
   machine = input.required<MachineWithServices>();
+  isSelected = input.required<boolean>()
 
   machineClicked = output();
 

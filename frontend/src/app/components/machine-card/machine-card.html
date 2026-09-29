@@ -1,4 +1,4 @@
-<button uiButton preset="card" (click)="clickMachine()">
+<button uiButton preset="card" (click)="clickMachine()" [variant]="isSelected() ? 'muted' : 'surface'">
     <ui-hstack justify="between" align="start">
         <ui-stack>
             <div>

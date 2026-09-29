@@ -59,7 +59,13 @@ export class App {
       });
   }
 
-  protected setMachineFilter(machineId: string): void {
+  protected machineSelected(machineId: string): void {
+    // deselect machine when clicked again
+    if(this.machineFilter() === machineId) {
+      this.machineFilter.set('all');
+      return;
+    }
+
     this.machineFilter.set(machineId);
   }
 

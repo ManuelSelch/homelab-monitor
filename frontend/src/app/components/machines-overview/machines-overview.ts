@@ -13,6 +13,7 @@ import { MachineCard } from '../machine-card/machine-card';
 })
 export class MachinesOverview {
   machines = input.required<MachineWithServices[]>();
+  currentMachine = input<string>();
 
   machineSelected = output<string>();
 
