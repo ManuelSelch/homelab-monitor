@@ -6,7 +6,7 @@
                 <ui-text size="sm" variant="muted">All services in one table. Filter by machine, status, or text.</ui-text>
             </div>
 
-            <div class="grid gap-3 md:grid-cols-[1fr_220px_180px]">
+            <ui-grid columns="3" responsive="false">
                 <input
                 class="h-10 rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
                 placeholder="Search services…"
@@ -35,7 +35,7 @@
                 <option value="Warning">Warning</option>
                 <option value="Offline">Offline</option>
                 </select>
-            </div>
+            </ui-grid>
         </ui-stack>
     </ui-box>
 
