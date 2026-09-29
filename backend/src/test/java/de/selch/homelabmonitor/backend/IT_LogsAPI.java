@@ -1,7 +1,8 @@
 package de.selch.homelabmonitor.backend;
 
-import de.selch.homelabmonitor.backend.logs.domain.LogEntry;
-import de.selch.homelabmonitor.backend.logs.infra.FakeLokiClient;
+import de.selch.homelabmonitor.backend.config.ProfileNames;
+import de.selch.homelabmonitor.backend.modules.logs.domain.LogEntry;
+import de.selch.homelabmonitor.backend.modules.logs.infra.FakeLokiClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

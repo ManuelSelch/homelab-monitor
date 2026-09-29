@@ -1,7 +1,8 @@
 package de.selch.homelabmonitor.backend;
 
-import de.selch.homelabmonitor.backend.proxmox.domain.ProxmoxResource;
-import de.selch.homelabmonitor.backend.proxmox.infra.FakeProxmoxClient;
+import de.selch.homelabmonitor.backend.config.ProfileNames;
+import de.selch.homelabmonitor.backend.modules.proxmox.domain.ProxmoxResource;
+import de.selch.homelabmonitor.backend.modules.proxmox.infra.FakeProxmoxClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class IT_MachinesAPI {
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$[*].id", hasItem("100")))
                 .andExpect(jsonPath("$[*].name", hasItem("Homelab")))
-                .andExpect(jsonPath("$[*].status", hasItem("Up")))
+                .andExpect(jsonPath("$[*].status", hasItem("online")))
                 .andExpect(jsonPath("$[0].cpuUsage").isNumber())
                 .andExpect(jsonPath("$[0].memoryUsage").isNumber());
     }

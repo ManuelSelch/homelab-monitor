@@ -1,5 +1,6 @@
 package de.selch.homelabmonitor.backend;
 
+import de.selch.homelabmonitor.backend.config.ProfileNames;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,7 +27,7 @@ public class IT_ServicesAPI {
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$[*].id",      hasItem("nextcloud")))
                 .andExpect(jsonPath("$[*].name",    hasItem("Nextcloud")))
-                .andExpect(jsonPath("$[*].status",  hasItem("Up")))
+                .andExpect(jsonPath("$[*].status",  hasItem("online")))
                 .andExpect(jsonPath("$[*].machineId", hasItem("100")));
     }
 }

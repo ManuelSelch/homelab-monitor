@@ -1,5 +1,5 @@
 services:
   - id: nextcloud
     name: Nextcloud
-    status: Up
+    status: online
     machineId: "100"

@@ -1,7 +1,7 @@
 services:
   - id: nextcloud
     name: Nextcloud
-    status: Up
+    status: online
     machineId: "100"
     logs:
       source: loki
