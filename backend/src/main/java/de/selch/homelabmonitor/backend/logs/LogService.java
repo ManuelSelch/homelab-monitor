@@ -3,7 +3,7 @@ package de.selch.homelabmonitor.backend.logs;
 import de.selch.homelabmonitor.backend.logs.domain.LogEntry;
 import de.selch.homelabmonitor.backend.logs.errors.LogLimitExceededException;
 import de.selch.homelabmonitor.backend.logs.errors.UnsupportedLogSourceException;
-import de.selch.homelabmonitor.backend.logs.infra.LokiClient;
+import de.selch.homelabmonitor.backend.logs.infra.LokiGateway;
 import de.selch.homelabmonitor.backend.services.infra.ServiceRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +12,11 @@ import java.util.List;
 @Service
 public class LogService {
     private final ServiceRepository serviceRepository;
-    private final LokiClient lokiClient;
+    private final LokiGateway loki;
 
-    public LogService(ServiceRepository serviceRepository, LokiClient lokiClient) {
+    public LogService(ServiceRepository serviceRepository, LokiGateway loki) {
         this.serviceRepository = serviceRepository;
-        this.lokiClient = lokiClient;
+        this.loki = loki;
     }
 
     public List<LogEntry> logs(String serviceId, int limit) {
@@ -32,6 +32,6 @@ public class LogService {
         if(limit > 1000)
             throw new LogLimitExceededException(limit, 1000);
 
-        return lokiClient.queryLogs(logs.selector(), limit);
+        return loki.queryLogs(logs.selector(), limit);
     }
 }
