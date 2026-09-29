@@ -12,6 +12,6 @@ import { UiTitle } from '../../ui/typography/title/title';
   templateUrl: './app-shell.html',
 })
 export class AppShell {
-  title = input.required<string>();
+  heading = input.required<string>();
   subtitle = input.required<string>();
 }
