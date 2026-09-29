@@ -6,7 +6,7 @@ import { badgeForStatus, UiBadge } from '../../ui/badge/badge';
 import { DashboardService, MachineWithServices } from '../../domain/dashboard';
 import { Status } from '../../domain/status';
 import { UiBox } from '../../ui/layout/box/box';
-import { UiGrid } from '../../ui/grid/grid';
+import { UiGrid } from '../../ui/layout/grid/grid';
 import { Select } from '../../ui/select/select';
 
 type ServiceStatusFilter = Status | 'all';
