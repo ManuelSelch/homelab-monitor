@@ -123,14 +123,16 @@ function toDashboardViewModel(machines: Machine[], services: MonitoredService[])
     servicesByMachineId.set(service.machineId, [...(servicesByMachineId.get(service.machineId) ?? []), service]);
   }
 
-  const machinesWithServices = machines.map((machine) => {
-    const services = (servicesByMachineId.get(machine.id) ?? []);
+  const machinesWithServices = machines
+    .map((machine) => {
+      const services = (servicesByMachineId.get(machine.id) ?? []);
 
-    return {
-      ...machine,
-      services: services,
-    } as MachineWithServices;
-  });
+      return {
+        ...machine,
+        services: services,
+      } as MachineWithServices;
+    })
+    .sort((a, b) => Number(a.id) - Number(b.id));
 
   const unassignedServices = services
     .filter((service) => !service.machineId || !machineById.has(service.machineId));
