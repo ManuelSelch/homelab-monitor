@@ -37,10 +37,6 @@ public class FakeProxmoxClient implements ProxmoxGateway {
         containers = List.of();
     }
 
-    public void givenVms(List<ProxmoxResource> vms) {
-        this.vms = vms;
-    }
-
     public void givenContainers(List<ProxmoxResource> containers) {
         this.containers = containers;
     }

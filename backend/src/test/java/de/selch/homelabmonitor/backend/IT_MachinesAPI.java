@@ -2,7 +2,6 @@ package de.selch.homelabmonitor.backend;
 
 import de.selch.homelabmonitor.backend.proxmox.domain.ProxmoxResource;
 import de.selch.homelabmonitor.backend.proxmox.infra.FakeProxmoxClient;
-import de.selch.homelabmonitor.backend.proxmox.infra.ProxmoxGateway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
