@@ -10,7 +10,7 @@ import {
 
 type ButtonAlign = 'center' | 'left';
 type ButtonHover = 'none' | 'muted' | 'primary';
-type ButtonPreset = 'default' | 'card' | 'cardButton' | 'primary' | 'secondary' | 'ghost';
+type ButtonPreset = 'default' | 'card' | 'primary' | 'secondary';
 
 type ButtonOptions = {
   variant: UiVariant;
@@ -44,16 +44,6 @@ const buttonPresets: Record<ButtonPreset, ButtonOptions> = {
     hover: 'primary',
     extra: '',
   },
-  cardButton: {
-    variant: 'surface',
-    padding: 'sm',
-    border: 'all',
-    radius: 'xl',
-    width: 'full',
-    align: 'left',
-    hover: 'primary',
-    extra: '',
-  },
   primary: {
     variant: 'plain',
     padding: 'sm',
@@ -73,17 +63,7 @@ const buttonPresets: Record<ButtonPreset, ButtonOptions> = {
     align: 'center',
     hover: 'muted',
     extra: '',
-  },
-  ghost: {
-    variant: 'plain',
-    padding: 'sm',
-    border: 'none',
-    radius: 'md',
-    width: 'auto',
-    align: 'center',
-    hover: 'muted',
-    extra: '',
-  },
+  }
 };
 
 @Directive({
