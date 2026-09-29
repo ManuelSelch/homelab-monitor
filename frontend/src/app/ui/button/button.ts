@@ -10,6 +10,81 @@ import {
 
 type ButtonAlign = 'center' | 'left';
 type ButtonHover = 'none' | 'muted' | 'primary';
+type ButtonPreset = 'default' | 'card' | 'cardButton' | 'primary' | 'secondary' | 'ghost';
+
+type ButtonOptions = {
+  variant: UiVariant;
+  padding: UiPadding;
+  border: UiBorder;
+  radius: UiRadius;
+  width: UiWidth;
+  align: ButtonAlign;
+  hover: ButtonHover;
+  extra: string;
+};
+
+const buttonPresets: Record<ButtonPreset, ButtonOptions> = {
+  default: {
+    variant: 'plain',
+    padding: 'sm',
+    border: 'none',
+    radius: 'md',
+    width: 'auto',
+    align: 'center',
+    hover: 'muted',
+    extra: '',
+  },
+  card: {
+    variant: 'surface',
+    padding: 'sm',
+    border: 'all',
+    radius: 'xl',
+    width: 'full',
+    align: 'left',
+    hover: 'primary',
+    extra: '',
+  },
+  cardButton: {
+    variant: 'surface',
+    padding: 'sm',
+    border: 'all',
+    radius: 'xl',
+    width: 'full',
+    align: 'left',
+    hover: 'primary',
+    extra: '',
+  },
+  primary: {
+    variant: 'plain',
+    padding: 'sm',
+    border: 'none',
+    radius: 'md',
+    width: 'auto',
+    align: 'center',
+    hover: 'none',
+    extra: 'bg-primary text-primary-foreground hover:bg-primary/90',
+  },
+  secondary: {
+    variant: 'muted',
+    padding: 'sm',
+    border: 'none',
+    radius: 'md',
+    width: 'auto',
+    align: 'center',
+    hover: 'muted',
+    extra: '',
+  },
+  ghost: {
+    variant: 'plain',
+    padding: 'sm',
+    border: 'none',
+    radius: 'md',
+    width: 'auto',
+    align: 'center',
+    hover: 'muted',
+    extra: '',
+  },
+};
 
 @Directive({
   selector: 'button[uiButton]',
@@ -18,15 +93,20 @@ type ButtonHover = 'none' | 'muted' | 'primary';
   },
 })
 export class UiButton {
-  variant = input<UiVariant>('plain');
-  padding = input<UiPadding>('sm');
-  border = input<UiBorder>('none');
-  radius = input<UiRadius>('md');
-  width = input<UiWidth>('auto');
-  align = input<ButtonAlign>('center');
-  hover = input<ButtonHover>('muted');
+  preset = input<ButtonPreset>('default');
+  variant = input<UiVariant | undefined>();
+  padding = input<UiPadding | undefined>();
+  border = input<UiBorder | undefined>();
+  radius = input<UiRadius | undefined>();
+  width = input<UiWidth | undefined>();
+  align = input<ButtonAlign | undefined>();
+  hover = input<ButtonHover | undefined>();
 
   classes = computed(() => {
+    const preset = buttonPresets[this.preset()];
+    const align = this.align() ?? preset.align;
+    const hover = this.hover() ?? preset.hover;
+
     const aligns: Record<ButtonAlign, string> = {
       center: 'text-center',
       left: 'text-left',
@@ -40,14 +120,15 @@ export class UiButton {
 
     return [
       boxClasses({
-        variant: this.variant(),
-        padding: this.padding(),
-        border: this.border(),
-        radius: this.radius(),
-        width: this.width(),
+        variant: this.variant() ?? preset.variant,
+        padding: this.padding() ?? preset.padding,
+        border: this.border() ?? preset.border,
+        radius: this.radius() ?? preset.radius,
+        width: this.width() ?? preset.width,
       }),
-      aligns[this.align()],
-      hovers[this.hover()],
+      aligns[align],
+      hovers[hover],
+      preset.extra,
       'transition disabled:pointer-events-none disabled:opacity-50',
     ]
       .filter(Boolean)

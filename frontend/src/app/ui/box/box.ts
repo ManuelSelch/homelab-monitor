@@ -3,6 +3,7 @@ import {
   boxClasses,
   type UiBorder,
   type UiPadding,
+  type UiPreset,
   type UiRadius,
   type UiVariant,
   type UiWidth,
@@ -13,14 +14,16 @@ import {
   template: `<div [class]="classes()"><ng-content /></div>`,
 })
 export class UiBox {
-  variant = input<UiVariant>('plain');
-  padding = input<UiPadding>('none');
-  border = input<UiBorder>('none');
-  radius = input<UiRadius>('none');
-  width = input<UiWidth>('auto');
+  preset = input<UiPreset>('plain');
+  variant = input<UiVariant | undefined>();
+  padding = input<UiPadding | undefined>();
+  border = input<UiBorder | undefined>();
+  radius = input<UiRadius | undefined>();
+  width = input<UiWidth | undefined>();
 
   classes = computed(() =>
     boxClasses({
+      preset: this.preset(),
       variant: this.variant(),
       padding: this.padding(),
       border: this.border(),
